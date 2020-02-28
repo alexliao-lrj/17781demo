@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MealPlanFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <!-- Meal Plan -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!--me_top-->
+
+                <LinearLayout
+                    android:id="@+id/me_mealplanpage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/fitness_round" />
+
+                    <TextView
+                        android:id="@+id/me_mealplan_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:ellipsize="start"
+                        android:maxWidth="200dp"
+                        android:singleLine="true"
+                        android:text="Flying Hamster"
+                        android:textColor="@android:color/black"
+                        android:textSize="24sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end|center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Home"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_common_right_arrow" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+                    <!--comment-->
+                    <LinearLayout
+                        android:id="@+id/mealplan_current"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Current Meal Plan"
+                                android:textColor="@android:color/black"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!--comment-->
+                    <!--split-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.2dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@android:color/black"
+                        android:textColor="@android:color/black" />
+                    <!--split-->
+                    <!--favor-->
+                    <LinearLayout
+                        android:id="@+id/mealplan_cur_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="18 : 6 Intermittent Fasting"
+                                android:textColor="@android:color/black"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!--favor-->
+                    <!--split-->
+                    <!--split-->
+                    <!--record-->
+                    <!--record-->
+                </LinearLayout>
+
+                <!--me_top-->
+                <!--meal plan option-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+                    <!--title-->
+                    <LinearLayout
+                        android:id="@+id/mealplan_option_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Meal Plan Options"
+                                android:textSize="14sp"
+                                android:textColor="@android:color/black" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!--title-->
+                    <!--split-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@android:color/darker_gray" />
+                    <!--split-->
+
+                    <!--balanced diet-->
+                    <LinearLayout
+                        android:id="@+id/mealplan_balanced_diet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Balanced Diet"
+                                android:textSize="14sp"
+                                android:textColor="@android:color/black" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_margin="5dp"
+                                android:src="@drawable/ic_common_right_arrow" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!--balanced diet-->
+
+                    <LinearLayout
+                        android:id="@+id/mealplan_52fast"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="5 : 2 Fast Diet"
+                                android:textSize="14sp"
+                                android:textColor="@android:color/black"/>
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_margin="5dp"
+                                android:src="@drawable/ic_common_right_arrow" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!--meal plan 2-->
+                    <LinearLayout
+                        android:id="@+id/mealplan_168fasting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="16 : 8 Intermittent Fasting"
+                                android:textSize="14sp"
+                                android:textColor="@android:color/black"/>
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_margin="5dp"
+                                android:src="@drawable/ic_common_right_arrow" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!--record-->
+
+                    <LinearLayout
+                        android:id="@+id/mealplan_186fasting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="18 : 6 Intermittent Fasting"
+                                android:textSize="14sp"
+                                android:textColor="@android:color/black"/>
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_margin="5dp"
+                                android:src="@drawable/ic_common_right_arrow" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/mealplan_204fasting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="20 : 4 Intermittent Fasting"
+                                android:textSize="14sp"
+                                android:textColor="@android:color/black"/>
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_margin="5dp"
+                                android:src="@drawable/ic_common_right_arrow" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <!--comment/record-->
+                <!--exit-->
+                <!--exit-->
+                <!--version-->
+                <!--version-->
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</FrameLayout>

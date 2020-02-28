@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Home"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/nav_weight"
+        android:icon="@drawable/ic_control_point_black_24dp"
+        android:title="Weight"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/nav_food"
+        android:icon="@drawable/ic_control_point_black_24dp"
+        android:title="Food"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/nav_sport"
+        android:icon="@drawable/ic_control_point_black_24dp"
+        android:title="Sport"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/nav_me"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="Me"
+        app:showAsAction="withText" />
+</menu>
