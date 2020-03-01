@@ -10,17 +10,17 @@
         app:showAsAction="withText" />
     <item
         android:id="@+id/nav_weight"
-        android:icon="@drawable/ic_control_point_black_24dp"
+        android:icon="@drawable/ic_show_chart_black_24dp"
         android:title="Weight"
         app:showAsAction="withText" />
     <item
         android:id="@+id/nav_food"
-        android:icon="@drawable/ic_control_point_black_24dp"
+        android:icon="@drawable/ic_restaurant_black_24dp"
         android:title="Food"
         app:showAsAction="withText" />
     <item
         android:id="@+id/nav_sport"
-        android:icon="@drawable/ic_control_point_black_24dp"
+        android:icon="@drawable/ic_directions_run_black_24dp"
         android:title="Sport"
         app:showAsAction="withText" />
     <item
