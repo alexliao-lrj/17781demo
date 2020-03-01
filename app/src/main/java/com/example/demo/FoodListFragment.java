@@ -1,6 +1,7 @@
 package com.example.demo;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ import java.util.List;
 public class FoodListFragment extends Fragment {
 
     private FloatingActionButton addFoodBtn;
+    private FloatingActionButton backMainBtn;
     private NavController foodNavController;
     private RecyclerView foodRecyclerView;
     private RecyclerView.Adapter foodListAdapter;
@@ -52,13 +54,19 @@ public class FoodListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
 
-        FragmentActivity activity = requireActivity();
+        final FragmentActivity activity = requireActivity();
         foodListViewModel = new ViewModelProvider(activity).get(FoodListViewModel.class);
 
         foodRecyclerView = activity.findViewById(R.id.foodListRecyclerView);
 
         createFoodList();
         buildRecyclerView(activity);
+
+        backMainBtn = activity.findViewById(R.id.floatingBackButton);
+        backMainBtn.setOnClickListener((v) -> {
+            Intent homeIntent = new Intent(activity, MainActivity.class);
+            startActivity(homeIntent);
+        });
 
         addFoodBtn = activity.findViewById(R.id.floatingAddButton);
         addFoodBtn.setOnClickListener(new View.OnClickListener() {
