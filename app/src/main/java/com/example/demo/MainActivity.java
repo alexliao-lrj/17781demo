@@ -5,14 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    BottomNavigationView bottomNavigationView;
-    NavController bottomNavController;
+    private BottomNavigationView bottomNavigationView;
+    private NavController bottomNavController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
                         bottomNavController.navigate(R.id.fitnessGoalFragment);
                         break;
                     case R.id.nav_food:
-                        bottomNavController.navigate(R.id.addFoodFragment);
+                        Intent foodIntent = new Intent(MainActivity.this, FoodActivity.class);
+                        startActivity(foodIntent);
                         break;
                     case R.id.nav_sport:
                         bottomNavController.navigate(R.id.dailyStepFragment);

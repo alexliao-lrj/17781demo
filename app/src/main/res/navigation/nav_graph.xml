@@ -27,11 +27,11 @@
         android:name="com.example.demo.FitnessGoalFragment"
         android:label="FitnessGoalFragment" />
     <fragment
-        android:id="@+id/addFoodFragment"
-        android:name="com.example.demo.AddFoodFragment"
-        android:label="AddFoodFragment" />
-    <fragment
         android:id="@+id/dailyStepFragment"
         android:name="com.example.demo.DailyStepFragment"
         android:label="DailyStepFragment" />
+    <fragment
+        android:id="@+id/mealPlanFragment"
+        android:name="com.example.demo.MealPlanFragment"
+        android:label="MealPlanFragment" />
 </navigation>
