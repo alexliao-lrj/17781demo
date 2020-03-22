@@ -63,8 +63,8 @@ public class AddFoodFragment extends Fragment {
                 builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        FoodItem newFood = new FoodItem(foodName.getText().toString(), Integer.valueOf(foodCal.getText().toString()));
-                        foodListViewModel.addFoodItem(newFood);
+                        Food newFood = new Food(foodName.getText().toString(), Integer.valueOf(foodCal.getText().toString()));
+                        foodListViewModel.addFoodItems(newFood);
                         foodNavController.navigateUp();
                     }
                 });

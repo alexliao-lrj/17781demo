@@ -1,5 +1,9 @@
 package com.example.demo;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -7,25 +11,33 @@ import androidx.lifecycle.ViewModel;
 import java.util.List;
 
 
-public class FoodListViewModel extends ViewModel {
+public class FoodListViewModel extends AndroidViewModel {
 
-    private MutableLiveData<List<FoodItem>> foodList = new MutableLiveData<>();
+    private FoodRepository foodRepository;
 
-    public void addFoodItem(FoodItem item){
-        foodList.getValue().add(item);
+    public FoodListViewModel(@NonNull Application application){
+        super(application);
+        foodRepository = new FoodRepository(application);
     }
 
-    public void initializeList(List<FoodItem> items){
-        if(foodList.getValue() == null){
-            foodList.setValue(items);
-        }
+    LiveData<List<Food>> getAllFoodsLive(){
+        return foodRepository.getAllFoodLive();
     }
 
-    public void clearAllFoods(){
-        foodList.getValue().clear();
+    public void addFoodItems(Food... items){
+        foodRepository.insertFoods(items);
     }
 
-    public LiveData<List<FoodItem>> getFoodList(){
-        return foodList;
+    public void clearAllFood(){
+        foodRepository.clearAllFoods();
     }
+
+    public void deleteFoodItems(Food... items){
+        foodRepository.deleteFoods(items);
+    }
+
+    public void updateFoodItems(Food... items){
+        foodRepository.updateFoods(items);
+    }
+
 }

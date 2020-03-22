@@ -30,12 +30,12 @@ public class FoodListFragment extends Fragment {
 
     private FloatingActionButton addFoodBtn;
     private FloatingActionButton backMainBtn;
+    private FloatingActionButton clearAllBtn;
     private NavController foodNavController;
     private RecyclerView foodRecyclerView;
-    private RecyclerView.Adapter foodListAdapter;
+    private FoodAdapter foodListAdapter;
     private RecyclerView.LayoutManager foodLayoutManager;
 
-    private List<FoodItem> foodItemList;
     private FoodListViewModel foodListViewModel;
 
     public FoodListFragment() {
@@ -59,7 +59,6 @@ public class FoodListFragment extends Fragment {
 
         foodRecyclerView = activity.findViewById(R.id.foodListRecyclerView);
 
-        createFoodList();
         buildRecyclerView(activity);
 
         backMainBtn = activity.findViewById(R.id.floatingBackButton);
@@ -77,21 +76,23 @@ public class FoodListFragment extends Fragment {
             }
         });
 
-        foodListViewModel.getFoodList().observe(getViewLifecycleOwner(), new Observer<List<FoodItem>>() {
+        clearAllBtn = activity.findViewById(R.id.floatingClearButton);
+        clearAllBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(List<FoodItem> foodItems) {
+            public void onClick(View v) {
+                foodListViewModel.clearAllFood();
+            }
+        });
+
+        foodListViewModel.getAllFoodsLive().observe(getViewLifecycleOwner(), new Observer<List<Food>>() {
+            @Override
+            public void onChanged(List<Food> foodItems) {
+                foodListAdapter.setFoodList(foodItems);
                 foodListAdapter.notifyDataSetChanged();
             }
         });
     }
 
-    public void createFoodList(){
-        foodItemList = new ArrayList<>();
-        foodItemList.add(new FoodItem("Apple", 56));
-        foodItemList.add(new FoodItem("Orange", 45));
-        foodItemList.add(new FoodItem("Skim Milk", 90));
-        foodListViewModel.initializeList(foodItemList);
-    }
 
     public void buildRecyclerView(FragmentActivity activity){
         foodLayoutManager = new LinearLayoutManager(activity);

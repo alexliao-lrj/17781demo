@@ -21,7 +21,16 @@ public class FoodActivity extends AppCompatActivity {
         setContentView(R.layout.activity_food);
         foodNavController = Navigation.findNavController(this, R.id.foodHomeFragmentHost);
         foodListViewModel = new ViewModelProvider(this).get(FoodListViewModel.class);
+        //createFoodList();
         NavigationUI.setupActionBarWithNavController(this, foodNavController);
+    }
+
+    public void createFoodList(){
+        String[] names = {"Apple", "Orange", "Skim Milk"};
+        int[] kcals = {56, 45, 90};
+        for(int i = 0; i < names.length; i++){
+            foodListViewModel.addFoodItems(new Food(names[i], kcals[i]));
+        }
     }
 
     @Override

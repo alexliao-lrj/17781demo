@@ -8,15 +8,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
-    //private List<FoodItem> foodList;
+    private List<Food> foodList = new ArrayList<>();
     private FoodListViewModel foodListViewModel;
 
     public FoodAdapter(FoodListViewModel foodListViewModel){
-        //this.foodList = foodList;
         this.foodListViewModel = foodListViewModel;
+    }
+
+    public void setFoodList(List<Food> foodList) {
+        this.foodList = foodList;
     }
 
     @NonNull
@@ -24,19 +28,26 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_item, parent,false);
         FoodViewHolder foodViewHolder = new FoodViewHolder(itemView);
+        foodViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return foodViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
-        FoodItem curItem = foodListViewModel.getFoodList().getValue().get(position);
+        Food curItem = foodList.get(position);
         holder.foodName.setText(curItem.getFoodName());
         holder.foodCal.setText(curItem.getFoodCal() + " kcal");
     }
 
     @Override
     public int getItemCount() {
-        return foodListViewModel.getFoodList().getValue().size();
+        return foodList.size();
     }
 
     public static class FoodViewHolder extends RecyclerView.ViewHolder{
