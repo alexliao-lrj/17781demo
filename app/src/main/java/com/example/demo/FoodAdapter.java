@@ -31,7 +31,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         foodViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                TextView name = v.findViewById(R.id.item_foodName);
+                TextView cal = v.findViewById(R.id.item_foodCal);
+                System.out.println("Name: " + name.getText());
+                System.out.println("Cal: " + cal.getText());
             }
         });
 

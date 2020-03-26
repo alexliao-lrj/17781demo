@@ -12,6 +12,10 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 /**
@@ -19,10 +23,14 @@ import android.view.ViewGroup;
  */
 public class HomeFragment extends Fragment {
 
+    private FirebaseAuth mAuth;
+
     private View home_healthdata;
     private View home_mealplan;
     private View home_fitnessgoal;
     private NavController navController;
+
+    TextView userName;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -40,6 +48,15 @@ public class HomeFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
         FragmentActivity activity = requireActivity();
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser curUser = mAuth.getCurrentUser();
+
+        if(curUser != null){
+            userName = activity.findViewById(R.id.profile_username);
+            userName.setText(curUser.getEmail());
+        }
+
         home_healthdata = activity.findViewById(R.id.home_healthdata);
         home_healthdata.setOnClickListener(new View.OnClickListener() {
             @Override

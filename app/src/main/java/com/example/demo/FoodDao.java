@@ -26,6 +26,8 @@ public interface FoodDao {
     @Query("delete from FOOD")
     void deleteAllFoods();
 
+    /*
     @Query("select * from FOOD where food_name like :pattern order by id")
     void findFoodsWithPattern(String pattern);
+     */
 }
