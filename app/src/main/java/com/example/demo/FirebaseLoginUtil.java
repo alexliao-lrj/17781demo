@@ -2,6 +2,8 @@ package com.example.demo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -13,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class FirebaseLoginUtil {
+    private static final String TAG = "FirebaseLoginUtilDebug";
+
     //delete current user
     public static void delete(Context context, String password) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();

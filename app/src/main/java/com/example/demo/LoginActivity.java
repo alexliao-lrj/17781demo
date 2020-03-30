@@ -103,8 +103,6 @@ public class LoginActivity extends AppCompatActivity {
             System.out.println("no user.");
         }else{
             System.out.println("current user: " + currentUser.getEmail());
-            //Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            //startActivity(intent);
         }
     }
 
@@ -225,11 +223,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void signOutUser(){
-        mAuth.signOut();
-        FirebaseUser curUser = mAuth.getCurrentUser();
-        if(curUser == null){
-            System.out.println("sign out success");
+        //mAuth.signOut();
+        if(mAuth.getCurrentUser() == null){
+            return;
         }
+        FirebaseLoginUtil.signOutUser(this);
         /*
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
@@ -243,6 +241,9 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        FirebaseLoginUtil.delete(this, "123456");
+
+        /*
         AuthCredential credential = EmailAuthProvider
                 .getCredential(curUser.getEmail(), "123456");
         curUser.reauthenticate(credential)
@@ -261,6 +262,7 @@ public class LoginActivity extends AppCompatActivity {
                                 });
                     }
                 });
+         */
 
         /*
         AuthUI.getInstance()
