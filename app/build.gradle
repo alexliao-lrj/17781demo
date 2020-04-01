@@ -1,12 +1,11 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.demo"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -61,4 +60,9 @@ dependencies {
     //firebase auth ui
     implementation 'com.firebaseui:firebase-ui-auth:6.2.0'
 
+    //firebase cloud firestore
+    implementation 'com.google.firebase:firebase-firestore:21.4.1'
+
 }
+
+apply plugin: 'com.google.gms.google-services'

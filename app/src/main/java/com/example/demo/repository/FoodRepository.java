@@ -1,13 +1,18 @@
-package com.example.demo;
+package com.example.demo.repository;
 
 import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.demo.model.Food;
+import com.example.demo.dao.FoodDao;
+import com.example.demo.database.WefitDatabase;
+
 import java.util.List;
 
 public class FoodRepository {
+    //cloud firestore region: nam5: us-central
 
     private LiveData<List<Food>> allFoodLive;
     private FoodDao foodDao;
@@ -22,19 +27,19 @@ public class FoodRepository {
         return allFoodLive;
     }
 
-    void insertFoods(Food... foods){
+    public void insertFoods(Food... foods){
         new InsertAsyncTask(foodDao).execute(foods);
     }
 
-    void clearAllFoods(){
+    public void clearAllFoods(){
         new ClearAllAsyncTask(foodDao).execute();
     }
 
-    void deleteFoods(Food... foods){
+    public void deleteFoods(Food... foods){
         new DeleteAsyncTask(foodDao).execute(foods);
     }
 
-    void updateFoods(Food... foods){
+    public void updateFoods(Food... foods){
         new UpdateAsyncTask(foodDao).execute(foods);
     }
 

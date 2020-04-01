@@ -1,12 +1,13 @@
-package com.example.demo;
+package com.example.demo.viewmodel;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+
+import com.example.demo.model.Food;
+import com.example.demo.repository.FoodRepository;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class FoodListViewModel extends AndroidViewModel {
         foodRepository = new FoodRepository(application);
     }
 
-    LiveData<List<Food>> getAllFoodsLive(){
+    public LiveData<List<Food>> getAllFoodsLive(){
         return foodRepository.getAllFoodLive();
     }
 
