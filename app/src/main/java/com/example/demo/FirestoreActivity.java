@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -180,5 +183,31 @@ public class FirestoreActivity extends AppCompatActivity {
             Firefood food = new Firefood(fn[i], pc[i], serving[i], category[i]);
             foods.add(food);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.top_menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.signOut:
+                AuthUI.getInstance().signOut(this);
+                startSignIn();
+                break;
+            case R.id.home:
+                Intent intent = new Intent(FirestoreActivity.this, MainActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

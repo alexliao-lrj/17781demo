@@ -81,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
                 AuthUI.getInstance().signOut(this);
                 startSignIn();
                 break;
+            case R.id.home:
+                bottomNavController.navigate(R.id.homeFragment);
+                break;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
