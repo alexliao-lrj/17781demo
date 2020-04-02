@@ -101,4 +101,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.8" />
 
+    <Button
+        android:id="@+id/toFireActivityBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Jump to Firestore Activity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/accountName"
+        app:layout_constraintStart_toStartOf="@+id/accountName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

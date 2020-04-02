@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         bottomNavController.navigate(R.id.fitnessGoalFragment);
                         break;
                     case R.id.nav_food:
-                        Intent foodIntent = new Intent(MainActivity.this, FoodActivity.class);
+                        Intent foodIntent = new Intent(MainActivity.this, FirestoreActivity.class);
                         startActivity(foodIntent);
                         break;
                     case R.id.nav_sport:
@@ -122,5 +122,17 @@ public class MainActivity extends AppCompatActivity {
 
         startActivityForResult(intent, RC_SIGN_IN);
         mViewModel.setIsSigningIn(true);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            mViewModel.setIsSigningIn(false);
+
+            if (resultCode != RESULT_OK && shouldStartSignIn()) {
+                startSignIn();
+            }
+        }
     }
 }

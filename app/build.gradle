@@ -43,15 +43,14 @@ dependencies {
     // Testing Navigation
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 
-    //github progress bar
-    implementation 'com.github.CardinalNow:Android-CircleProgressIndicator:v0.2'
-
     //jetpack room database
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     // For Kotlin use kapt instead of annotationProcessor
 
+    //firebase cloud firestore
+    implementation 'com.google.firebase:firebase-firestore:21.4.0'
     //Firebase
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     //firebase authentication
@@ -60,9 +59,10 @@ dependencies {
     //firebase auth ui
     implementation 'com.firebaseui:firebase-ui-auth:6.2.0'
 
-    //firebase cloud firestore
-    implementation 'com.google.firebase:firebase-firestore:21.4.1'
-
+    // Android architecture components
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.2.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
