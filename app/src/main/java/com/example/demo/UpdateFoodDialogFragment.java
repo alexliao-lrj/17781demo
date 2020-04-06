@@ -111,7 +111,7 @@ public class UpdateFoodDialogFragment extends DialogFragment implements View.OnC
     }
 
     public void onSubmitClicked(View view) {
-        System.out.println("----------submitted");
+        System.out.println("----------food update submitted");
         double newSize = Double.valueOf(servingSize.getText().toString());
         mFood.setServing(newSize);
         mFood.setTotalCal(newSize * mFood.getPerCal());

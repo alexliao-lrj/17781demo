@@ -5,4 +5,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_food_result">Add this food ?</string>
     <string name="update_food_title">Change Food Info</string>
+
+    <string name="value_any_category">Choose a Meal</string>
+
+    <string-array name="meal_categories">
+        <item>@string/value_any_category</item>
+
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+        <item>Snack</item>
+    </string-array>
+
 </resources>

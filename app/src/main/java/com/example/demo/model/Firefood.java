@@ -16,7 +16,7 @@ public class Firefood {
     private double perCal;
     //how many servings
     private double serving;
-    //breakfast1 lunch2 dinner3 snack4
+    //breakfast1 lunch2 dinner3 snack4 other5
     private int category;
     //datetime
     private @ServerTimestamp Date timestamp;

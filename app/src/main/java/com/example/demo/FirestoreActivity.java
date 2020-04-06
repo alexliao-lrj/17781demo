@@ -40,7 +40,8 @@ import java.util.Collections;
 
 public class FirestoreActivity extends AppCompatActivity implements
         FirefoodAdapter.OnFoodSelectedListener,
-        UpdateFoodDialogFragment.UpdateFoodListner {
+        UpdateFoodDialogFragment.UpdateFoodListner,
+        AddFoodDialogFragment.OnAddFoodListener {
 
     private static final String TAG = "FirestoreActivity";
 
@@ -52,13 +53,14 @@ public class FirestoreActivity extends AppCompatActivity implements
 
     private FirebaseFirestore mFirestore;
     private Query mQuery;
-    private DocumentReference mCalorieIntakeRef;
+    private CollectionReference mCalorieIntakeFoodsRef;
 
     private FirestoreActivityViewModel mViewModel;
     private FirefoodAdapter mAdapter;
     private RecyclerView mFirefoodRecycler;
 
     private UpdateFoodDialogFragment updateFoodDialog;
+    private AddFoodDialogFragment addFoodDialog;
     private Toolbar toolbar;
     private FloatingActionButton addFoodBtn;
 
@@ -82,11 +84,14 @@ public class FirestoreActivity extends AppCompatActivity implements
         initFirestore();
         initRecyclerView();
 
+        addFoodDialog = new AddFoodDialogFragment();
+
         addFoodBtn = findViewById(R.id.addFoodButton);
         addFoodBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onAddItemsClicked();
+                //onAddItemsClicked();
+                addFoodItem();
             }
         });
 
@@ -121,14 +126,14 @@ public class FirestoreActivity extends AppCompatActivity implements
         mFirestore = FirebaseFirestore.getInstance();
         String userKey = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         String dateKey = LocalDate.now().toString();
-        mCalorieIntakeRef = mFirestore
+        mCalorieIntakeFoodsRef = mFirestore
                 .collection("users")
                 .document(userKey)
                 .collection(dateKey)
-                .document("calorieIntake");
+                .document("calorieIntake")
+                .collection("foods");
 
-        mQuery = mCalorieIntakeRef
-                .collection("foods")
+        mQuery = mCalorieIntakeFoodsRef
                 .orderBy("category", Query.Direction.ASCENDING)
                 .limit(LIMIT);
         /*
@@ -190,7 +195,7 @@ public class FirestoreActivity extends AppCompatActivity implements
     }
 
     private void onAddItemsClicked() {
-        // TODO(developer): Add random restaurants
+        // TODO(developer): Add random foods
         String userKey = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         String dateKey = LocalDate.now().toString();
         CollectionReference foods = mFirestore
@@ -208,6 +213,10 @@ public class FirestoreActivity extends AppCompatActivity implements
             Firefood food = new Firefood(fn[i], pc[i], serving[i], category[i]);
             foods.add(food);
         }
+    }
+
+    private void addFoodItem(){
+        addFoodDialog.show(getSupportFragmentManager(), AddFoodDialogFragment.TAG);
     }
 
     @Override
@@ -274,5 +283,29 @@ public class FirestoreActivity extends AppCompatActivity implements
             ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
                     .hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    @Override
+    public void onFoodAdding(Firefood food) {
+        addFood(mCalorieIntakeFoodsRef, food).addOnSuccessListener(this, new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "-------Food added");
+                hideKeyboard();
+                mFirefoodRecycler.smoothScrollToPosition(0);
+            }
+        }).addOnFailureListener(this, (e)->{
+            Log.w(TAG, "--------Food add failed", e);
+            hideKeyboard();
+            Snackbar.make(findViewById(android.R.id.content), "Failed to add food, Retry.",
+                    Snackbar.LENGTH_SHORT).show();
+        });
+    }
+
+    private Task<Void> addFood(final CollectionReference foodsRef, final Firefood food){
+        return mFirestore.runTransaction((transaction -> {
+            foodsRef.add(food);
+            return null;
+        }));
     }
 }
