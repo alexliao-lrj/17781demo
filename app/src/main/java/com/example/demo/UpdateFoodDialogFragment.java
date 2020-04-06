@@ -1,10 +1,9 @@
 package com.example.demo;
 
-
-import android.app.Dialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -12,42 +11,118 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.example.demo.model.Firefood;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.time.LocalDate;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UpdateFoodDialogFragment extends DialogFragment {
+public class UpdateFoodDialogFragment extends DialogFragment implements View.OnClickListener{
+    public static final String TAG = "Update Food Dialog";
 
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState){
-        // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+    public static final String KEY_FOOD_ID = "key_food_id";
 
-        // Get the layout inflater
-        LayoutInflater inflater = requireActivity().getLayoutInflater();
+    private FirebaseFirestore mFirestore;
+    private DocumentReference mFoodRef;
 
-        builder.setView(inflater.inflate(R.layout.modify_food_dialog, null))
-                .setTitle(R.string.update_food_title)
-                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+    private Firefood mFood;
 
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-                    }
-                });
-        // Create the AlertDialog object and return it
-        return builder.create();
+    private TextView foodName;
+    private EditText servingSize;
+    private Button cancel, submit, delete;
+
+    interface UpdateFoodListner{
+        void onFoodUpdating(DocumentReference foodRef, Firefood food);
     }
 
+    private UpdateFoodListner updateFoodListner;
+
+    @NonNull
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_update_food_dialog, container, false);
+        View v = inflater.inflate(R.layout.fragment_update_food_dialog, container, false);
+        foodName = v.findViewById(R.id.food_name);
+        servingSize = v.findViewById(R.id.serving_size);
+
+        cancel = v.findViewById(R.id.cancel_update);
+        submit = v.findViewById(R.id.submit_update);
+        delete = v.findViewById(R.id.delete_food);
+
+        cancel.setOnClickListener(this);
+        submit.setOnClickListener(this);
+        delete.setOnClickListener(this);
+
+        mFirestore = FirebaseFirestore.getInstance();
+        String userKey = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String dateKey = LocalDate.now().toString();
+        String foodId = getArguments().getString(KEY_FOOD_ID);
+        mFoodRef = mFirestore
+                .collection("users")
+                .document(userKey)
+                .collection(dateKey)
+                .document("calorieIntake")
+                .collection("foods")
+                .document(foodId);
+        mFoodRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                mFood = documentSnapshot.toObject(Firefood.class);
+                foodName.setText(mFood.getName());
+                servingSize.setText(String.valueOf(mFood.getServing()));
+            }
+        });
+
+        return v;
     }
 
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        //set updatefoodlistener to FirestoreActivity
+        if(context instanceof UpdateFoodListner){
+            updateFoodListner = (UpdateFoodListner) context;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.submit_update:
+                onSubmitClicked(v);
+                break;
+            case R.id.cancel_update:
+                onCancelClicked(v);
+                break;
+        }
+        servingSize.setText("");
+    }
+
+    public void onSubmitClicked(View view) {
+        System.out.println("----------submitted");
+        double newSize = Double.valueOf(servingSize.getText().toString());
+        mFood.setServing(newSize);
+        mFood.setTotalCal(newSize * mFood.getPerCal());
+        if(updateFoodListner != null){
+            updateFoodListner.onFoodUpdating(mFoodRef, mFood);
+        }
+
+        dismiss();
+    }
+
+    public void onCancelClicked(View view) {
+        dismiss();
+    }
 }

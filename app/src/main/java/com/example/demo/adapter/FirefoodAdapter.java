@@ -16,8 +16,15 @@ import com.google.firebase.firestore.Query;
 
 public class FirefoodAdapter extends FirestoreAdapter<FirefoodAdapter.ViewHolder> {
 
-    public FirefoodAdapter(Query query) {
+    public interface OnFoodSelectedListener{
+        void onFoodSelected(DocumentSnapshot food);
+    }
+
+    private OnFoodSelectedListener mListener;
+
+    public FirefoodAdapter(Query query, OnFoodSelectedListener listener) {
         super(query);
+        mListener = listener;
     }
 
     @NonNull
@@ -29,7 +36,7 @@ public class FirefoodAdapter extends FirestoreAdapter<FirefoodAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bind(getSnapshot(position));
+        holder.bind(getSnapshot(position), mListener);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
@@ -42,10 +49,20 @@ public class FirefoodAdapter extends FirestoreAdapter<FirefoodAdapter.ViewHolder
             foodNameView = itemView.findViewById(R.id.item_foodName);
         }
 
-        public void bind(final DocumentSnapshot snapshot){
+        public void bind(final DocumentSnapshot snapshot, final OnFoodSelectedListener listener){
             Firefood food = snapshot.toObject(Firefood.class);
             foodNameView.setText(food.getName());
             totalCalView.setText(String.valueOf(food.getTotalCal()));
+
+            // Click listener
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        listener.onFoodSelected(snapshot);
+                    }
+                }
+            });
         }
     }
 }

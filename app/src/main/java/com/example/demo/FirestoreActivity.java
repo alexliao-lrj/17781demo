@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,16 +16,21 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import com.example.demo.adapter.FirefoodAdapter;
 import com.example.demo.model.Firefood;
 import com.example.demo.viewmodel.FirestoreActivityViewModel;
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
@@ -32,7 +38,10 @@ import com.google.firebase.firestore.Query;
 import java.time.LocalDate;
 import java.util.Collections;
 
-public class FirestoreActivity extends AppCompatActivity {
+public class FirestoreActivity extends AppCompatActivity implements
+        FirefoodAdapter.OnFoodSelectedListener,
+        UpdateFoodDialogFragment.UpdateFoodListner {
+
     private static final String TAG = "FirestoreActivity";
 
     //private FirebaseFirestore mFirestore;
@@ -43,12 +52,14 @@ public class FirestoreActivity extends AppCompatActivity {
 
     private FirebaseFirestore mFirestore;
     private Query mQuery;
+    private DocumentReference mCalorieIntakeRef;
 
     private FirestoreActivityViewModel mViewModel;
     private FirefoodAdapter mAdapter;
     private RecyclerView mFirefoodRecycler;
 
-    Toolbar toolbar;
+    private UpdateFoodDialogFragment updateFoodDialog;
+    private Toolbar toolbar;
     private FloatingActionButton addFoodBtn;
 
     @Override
@@ -78,6 +89,8 @@ public class FirestoreActivity extends AppCompatActivity {
                 onAddItemsClicked();
             }
         });
+
+        updateFoodDialog = new UpdateFoodDialogFragment();
     }
 
     @Override
@@ -108,6 +121,17 @@ public class FirestoreActivity extends AppCompatActivity {
         mFirestore = FirebaseFirestore.getInstance();
         String userKey = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         String dateKey = LocalDate.now().toString();
+        mCalorieIntakeRef = mFirestore
+                .collection("users")
+                .document(userKey)
+                .collection(dateKey)
+                .document("calorieIntake");
+
+        mQuery = mCalorieIntakeRef
+                .collection("foods")
+                .orderBy("category", Query.Direction.ASCENDING)
+                .limit(LIMIT);
+        /*
         mQuery = mFirestore
                 .collection("users")
                 .document(userKey)
@@ -116,6 +140,7 @@ public class FirestoreActivity extends AppCompatActivity {
                 .collection("foods")
                 .orderBy("category", Query.Direction.ASCENDING)
                 .limit(LIMIT);
+         */
     }
 
     private void initRecyclerView(){
@@ -123,7 +148,7 @@ public class FirestoreActivity extends AppCompatActivity {
             Log.w(TAG, "No query, not initializing RecyclerView");
         }
 
-        mAdapter = new FirefoodAdapter(mQuery) {
+        mAdapter = new FirefoodAdapter(mQuery, this) {
             @Override
             protected void onError(FirebaseFirestoreException e) {
                 // Show a snackbar on errors
@@ -209,5 +234,45 @@ public class FirestoreActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFoodSelected(DocumentSnapshot food) {
+        Bundle bundle = new Bundle();
+        bundle.putString(UpdateFoodDialogFragment.KEY_FOOD_ID, food.getId());
+        updateFoodDialog.setArguments(bundle);
+        updateFoodDialog.show(getSupportFragmentManager(), UpdateFoodDialogFragment.TAG);
+    }
+
+    private Task<Void> updateFood(final DocumentReference foodRef, final Firefood food){
+        return mFirestore.runTransaction((transaction -> {
+            transaction.set(foodRef, food);
+            return null;
+        }));
+    }
+
+    @Override
+    public void onFoodUpdating(DocumentReference foodRef, Firefood food) {
+        updateFood(foodRef, food).addOnSuccessListener(this, new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "-------Food updated");
+                hideKeyboard();
+                mFirefoodRecycler.smoothScrollToPosition(0);
+            }
+        }).addOnFailureListener(this, (e)->{
+            Log.w(TAG, "--------Food update failed", e);
+            hideKeyboard();
+            Snackbar.make(findViewById(android.R.id.content), "Failed to update food, Retry.",
+                    Snackbar.LENGTH_SHORT).show();
+        });
+    }
+
+    private void hideKeyboard() {
+        View view = getCurrentFocus();
+        if (view != null) {
+            ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
