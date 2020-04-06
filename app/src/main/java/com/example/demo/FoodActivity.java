@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -8,29 +9,25 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 
 public class FoodActivity extends AppCompatActivity {
 
     private NavController foodNavController;
-    private FoodListViewModel foodListViewModel;
+    //private FoodListViewModel foodListViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
         foodNavController = Navigation.findNavController(this, R.id.foodHomeFragmentHost);
-        foodListViewModel = new ViewModelProvider(this).get(FoodListViewModel.class);
-        //createFoodList();
-        NavigationUI.setupActionBarWithNavController(this, foodNavController);
-    }
-
-    public void createFoodList(){
-        String[] names = {"Apple", "Orange", "Skim Milk"};
-        int[] kcals = {56, 45, 90};
-        for(int i = 0; i < names.length; i++){
-            foodListViewModel.addFoodItems(new Food(names[i], kcals[i]));
-        }
+        Toolbar toolbar = findViewById(R.id.top_toolbar);
+        setSupportActionBar(toolbar);
+        //foodListViewModel = new ViewModelProvider(this).get(FoodListViewModel.class);
+        //NavigationUI.setupActionBarWithNavController(this, foodNavController);
     }
 
     @Override
@@ -45,5 +42,26 @@ public class FoodActivity extends AppCompatActivity {
         imm.hideSoftInputFromWindow(findViewById(R.id.foodHomeFragmentHost).getWindowToken(),0);
         foodNavController.navigateUp();
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.top_menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.signOut:
+                FirebaseLoginUtil.signOutUser(this);
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 }

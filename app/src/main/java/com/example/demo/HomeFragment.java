@@ -49,14 +49,6 @@ public class HomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity activity = requireActivity();
 
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser curUser = mAuth.getCurrentUser();
-
-        if(curUser != null){
-            userName = activity.findViewById(R.id.profile_username);
-            userName.setText(curUser.getEmail());
-        }
-
         home_healthdata = activity.findViewById(R.id.home_healthdata);
         home_healthdata.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,5 +73,18 @@ public class HomeFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.fitnessGoalFragment);
             }
         });
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser curUser = mAuth.getCurrentUser();
+
+        if(curUser != null){
+            userName = requireActivity().findViewById(R.id.profile_username);
+            userName.setText(curUser.getEmail());
+        }
     }
 }

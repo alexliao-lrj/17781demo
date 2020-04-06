@@ -18,6 +18,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.demo.model.Food;
+import com.example.demo.viewmodel.FoodListViewModel;
+
 
 /**
  * A simple {@link Fragment} subclass.

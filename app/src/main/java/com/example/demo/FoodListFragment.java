@@ -17,9 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
+import com.example.demo.adapter.FoodAdapter;
+import com.example.demo.model.Food;
+import com.example.demo.viewmodel.FoodListViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.List;
 
 
@@ -27,6 +33,9 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class FoodListFragment extends Fragment {
+    private static final String TAG = "FoodListFragmentDebug";
+
+    FirebaseFirestore firebasedb;
 
     private FloatingActionButton addFoodBtn;
     private FloatingActionButton backMainBtn;
@@ -60,6 +69,65 @@ public class FoodListFragment extends Fragment {
         foodRecyclerView = activity.findViewById(R.id.foodListRecyclerView);
 
         buildRecyclerView(activity);
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser curUser = mAuth.getCurrentUser();
+
+        //firestore db
+        //firebasedb = FirebaseFirestore.getInstance();
+        //System.out.println(firebasedb.collection("users").getPath());
+
+        /*
+        //add user profile
+        Map<String, Object> profile = new HashMap<>();
+        profile.put("Gender", "Female");
+        profile.put("Alias", "Roger0");
+        firebasedb.collection("users")
+                .document("profile")
+                .set(profile)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("-----------firebase succeed");
+                        Log.d(TAG, "user profile successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("-----------firebase failed");
+                        Log.w(TAG, "Error writing healthdata", e);
+                    }
+                });
+
+
+        //add user healthdata on specific date
+        Map<String, Object> healthData = new HashMap<>();
+        healthData.put("Height", 163);
+        healthData.put("Current Weight", 111);
+        healthData.put("Target Weight", 108);
+        healthData.put("BMI", 18.9);
+        String curDate = LocalDate.now().toString();
+        firebasedb.collection("users")
+                .document(curUser.getEmail())
+                .collection(curDate)
+                .document("healthData")
+                .set(healthData)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "user date healthdata successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing healthdata", e);
+                    }
+                });
+
+         */
+
 
         backMainBtn = activity.findViewById(R.id.floatingBackButton);
         backMainBtn.setOnClickListener((v) -> {

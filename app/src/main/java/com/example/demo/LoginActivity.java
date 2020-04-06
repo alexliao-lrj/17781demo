@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "loginDebug";
 
-    Button loginBtn, deleteBtn, jumpBtn, signOutBtn, registerBtn;
+    Button loginBtn, deleteBtn, jumpBtn, signOutBtn, registerBtn, toFireBtn;
     EditText mAccount;
     EditText mPassword;
 
@@ -72,6 +72,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        toFireBtn = findViewById(R.id.toFireActivityBtn);
+        toFireBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, FirestoreActivity.class);
                 startActivity(intent);
             }
         });
