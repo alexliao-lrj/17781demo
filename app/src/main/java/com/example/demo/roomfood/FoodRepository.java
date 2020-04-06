@@ -1,13 +1,9 @@
-package com.example.demo.repository;
+package com.example.demo.roomfood;
 
 import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
-
-import com.example.demo.model.Food;
-import com.example.demo.dao.FoodDao;
-import com.example.demo.database.WefitDatabase;
 
 import java.util.List;
 

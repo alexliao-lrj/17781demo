@@ -1,13 +1,10 @@
-package com.example.demo.viewmodel;
+package com.example.demo.roomfood;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-
-import com.example.demo.model.Food;
-import com.example.demo.repository.FoodRepository;
 
 import java.util.List;
 

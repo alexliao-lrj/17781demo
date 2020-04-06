@@ -1,4 +1,4 @@
-package com.example.demo.dao;
+package com.example.demo.roomfood;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -7,7 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.demo.model.Food;
+import com.example.demo.roomfood.Food;
 
 import java.util.List;
 

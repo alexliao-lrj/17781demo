@@ -1,13 +1,10 @@
-package com.example.demo.database;
+package com.example.demo.roomfood;
 
 import android.content.Context;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-
-import com.example.demo.model.Food;
-import com.example.demo.dao.FoodDao;
 
 @Database(entities = {Food.class}, version = 1, exportSchema = false)
 public abstract class WefitDatabase extends RoomDatabase {

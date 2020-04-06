@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.roomfood;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,6 +13,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
+
+import com.example.demo.FirebaseLoginUtil;
+import com.example.demo.R;
 
 public class FoodActivity extends AppCompatActivity {
 

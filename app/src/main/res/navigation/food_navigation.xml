@@ -4,11 +4,11 @@
     app:startDestination="@id/foodListFragment">
     <fragment
         android:id="@+id/addFoodFragment"
-        android:name="com.example.demo.AddFoodFragment"
+        android:name="com.example.demo.roomfood.AddFoodFragment"
         android:label="AddFoodFragment" />
     <fragment
         android:id="@+id/foodListFragment"
-        android:name="com.example.demo.FoodListFragment"
+        android:name="com.example.demo.roomfood.FoodListFragment"
         android:label="FoodListFragment" >
         <action
             android:id="@+id/action_foodListFragment_to_addFoodFragment"

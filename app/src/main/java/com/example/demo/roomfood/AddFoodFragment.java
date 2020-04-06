@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.roomfood;
 
 
 import android.app.AlertDialog;
@@ -18,8 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.demo.model.Food;
-import com.example.demo.viewmodel.FoodListViewModel;
+import com.example.demo.R;
 
 
 /**

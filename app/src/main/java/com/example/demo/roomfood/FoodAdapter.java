@@ -1,4 +1,4 @@
-package com.example.demo.adapter;
+package com.example.demo.roomfood;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.demo.model.Food;
 import com.example.demo.R;
-import com.example.demo.viewmodel.FoodListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

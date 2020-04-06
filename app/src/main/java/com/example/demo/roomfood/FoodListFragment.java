@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.roomfood;
 
 
 import android.content.Intent;
@@ -18,9 +18,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.demo.adapter.FoodAdapter;
-import com.example.demo.model.Food;
-import com.example.demo.viewmodel.FoodListViewModel;
+import com.example.demo.MainActivity;
+import com.example.demo.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
