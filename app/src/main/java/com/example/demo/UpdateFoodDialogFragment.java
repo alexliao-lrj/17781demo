@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.demo.model.Firefood;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,6 +36,8 @@ public class UpdateFoodDialogFragment extends DialogFragment implements View.OnC
 
     private FirebaseFirestore mFirestore;
     private DocumentReference mFoodRef;
+    private CollectionReference mFoodsCollectionRef;
+    private String foodId;
 
     private Firefood mFood;
 
@@ -44,6 +47,8 @@ public class UpdateFoodDialogFragment extends DialogFragment implements View.OnC
 
     interface UpdateFoodListner{
         void onFoodUpdating(DocumentReference foodRef, Firefood food);
+
+        void onFoodDeleting(CollectionReference foodsRef, String foodId);
     }
 
     private UpdateFoodListner updateFoodListner;
@@ -68,14 +73,14 @@ public class UpdateFoodDialogFragment extends DialogFragment implements View.OnC
         mFirestore = FirebaseFirestore.getInstance();
         String userKey = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         String dateKey = LocalDate.now().toString();
-        String foodId = getArguments().getString(KEY_FOOD_ID);
-        mFoodRef = mFirestore
+        foodId = getArguments().getString(KEY_FOOD_ID);
+        mFoodsCollectionRef = mFirestore
                 .collection("users")
                 .document(userKey)
                 .collection(dateKey)
                 .document("calorieIntake")
-                .collection("foods")
-                .document(foodId);
+                .collection("foods");
+        mFoodRef = mFoodsCollectionRef.document(foodId);
         mFoodRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -106,6 +111,9 @@ public class UpdateFoodDialogFragment extends DialogFragment implements View.OnC
             case R.id.cancel_update:
                 onCancelClicked(v);
                 break;
+            case R.id.delete_food:
+                onDeleteClicked(v);
+                break;
         }
         servingSize.setText("");
     }
@@ -123,6 +131,13 @@ public class UpdateFoodDialogFragment extends DialogFragment implements View.OnC
     }
 
     public void onCancelClicked(View view) {
+        dismiss();
+    }
+
+    public void onDeleteClicked(View view){
+        if(updateFoodListner != null){
+            updateFoodListner.onFoodDeleting(mFoodsCollectionRef, foodId);
+        }
         dismiss();
     }
 }

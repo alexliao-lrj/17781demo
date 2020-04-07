@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AddFoodDialogFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        style="@style/AppTheme.Title"
+        android:id="@+id/add_food_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Food"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/food_name"/>
+
+    <EditText
+        android:id="@+id/food_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="Food Name"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@id/per_cal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_food_title" />
+
+    <EditText
+        android:id="@+id/per_cal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Calories per Serving / kcal"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/serving_size"
+        app:layout_constraintEnd_toEndOf="@id/food_name"
+        app:layout_constraintStart_toStartOf="@id/food_name"
+        app:layout_constraintTop_toBottomOf="@id/food_name" />
+
+    <EditText
+        android:id="@+id/serving_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Serving Size"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/add_food_submit"
+        app:layout_constraintEnd_toEndOf="@id/food_name"
+        app:layout_constraintStart_toStartOf="@id/food_name"
+        app:layout_constraintTop_toBottomOf="@id/per_cal" />
+
+    <Spinner
+        style="@style/AppTheme.FilterSpinner"
+        android:id="@+id/spinner_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/meal_categories"
+        app:layout_constraintBottom_toTopOf="@id/add_food_submit"
+        app:layout_constraintTop_toBottomOf="@id/serving_size"
+        app:layout_constraintStart_toStartOf="@id/food_name"
+        app:layout_constraintEnd_toEndOf="@id/food_name"/>
+
+    <LinearLayout
+        android:id="@+id/add_food_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/food_name"
+        app:layout_constraintStart_toStartOf="@id/food_name"
+        app:layout_constraintTop_toBottomOf="@id/serving_size">
+
+        <Button
+            android:id="@+id/cancel_add"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel" />
+
+
+        <Button
+            android:id="@+id/submit_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Submit" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,7 +17,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 
 import com.example.demo.adapter.FirefoodAdapter;
 import com.example.demo.model.Firefood;
@@ -260,6 +259,7 @@ public class FirestoreActivity extends AppCompatActivity implements
         }));
     }
 
+    //update food
     @Override
     public void onFoodUpdating(DocumentReference foodRef, Firefood food) {
         updateFood(foodRef, food).addOnSuccessListener(this, new OnSuccessListener<Void>() {
@@ -285,6 +285,7 @@ public class FirestoreActivity extends AppCompatActivity implements
         }
     }
 
+    //add food
     @Override
     public void onFoodAdding(Firefood food) {
         addFood(mCalorieIntakeFoodsRef, food).addOnSuccessListener(this, new OnSuccessListener<Void>() {
@@ -307,5 +308,23 @@ public class FirestoreActivity extends AppCompatActivity implements
             foodsRef.add(food);
             return null;
         }));
+    }
+
+    //delete food
+    @Override
+    public void onFoodDeleting(CollectionReference foodsRef, String foodId) {
+        foodsRef.document(foodId).delete().addOnSuccessListener(this, new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "-------Food deleted");
+                hideKeyboard();
+                mFirefoodRecycler.smoothScrollToPosition(0);
+            }
+        }).addOnFailureListener(this, (e)->{
+            Log.w(TAG, "--------Food delete failed", e);
+            hideKeyboard();
+            Snackbar.make(findViewById(android.R.id.content), "Failed to delete food, Retry.",
+                    Snackbar.LENGTH_SHORT).show();
+        });
     }
 }
