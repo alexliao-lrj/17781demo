@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private NavController bottomNavController;
 
-    private FirebaseAuth mAuth;
     private MainActivityViewModel mViewModel;
 
     @Override
@@ -39,12 +38,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
-        mAuth = FirebaseAuth.getInstance();
-
-        FirebaseUser curUser = mAuth.getCurrentUser();
-        if(curUser != null){
-            System.out.println("Main: " + curUser.getEmail());
-        }
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
