@@ -59,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(foodIntent);
                         break;
                     case R.id.nav_sport:
-                        bottomNavController.navigate(R.id.dailyStepFragment);
+                        Intent sportIntent = new Intent(MainActivity.this, SportActivity.class);
+                        startActivity(sportIntent);
                         break;
                 }
                 return true;
