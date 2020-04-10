@@ -21,6 +21,7 @@ import com.example.demo.adapter.FirefoodAdapter;
 import com.example.demo.model.Firefood;
 import com.example.demo.viewmodel.FirestoreActivityViewModel;
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,9 +33,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FirestoreActivity extends AppCompatActivity implements
         FirefoodAdapter.OnFoodSelectedListener,
@@ -51,6 +56,7 @@ public class FirestoreActivity extends AppCompatActivity implements
 
     private FirebaseFirestore mFirestore;
     private Query mQuery;
+    private DocumentReference mCalorieIntakeRef;
     private CollectionReference mCalorieIntakeFoodsRef;
 
     private FirestoreActivityViewModel mViewModel;
@@ -124,12 +130,25 @@ public class FirestoreActivity extends AppCompatActivity implements
         mFirestore = FirebaseFirestore.getInstance();
         String userKey = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         String dateKey = LocalDate.now().toString();
-        mCalorieIntakeFoodsRef = mFirestore
+        mCalorieIntakeRef = mFirestore
                 .collection("users")
                 .document(userKey)
                 .collection(dateKey)
-                .document("calorieIntake")
-                .collection("foods");
+                .document("calorieIntake");
+        /*
+        Map<String, Double> total = new HashMap<>();
+        total.put("Total", 230.0);
+        calorieIntake.set(total);
+         */
+        mCalorieIntakeRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Double res = (Double) documentSnapshot.get("Total");
+                System.out.println("Total: " + res);
+            }
+        });
+
+        mCalorieIntakeFoodsRef = mCalorieIntakeRef.collection("foods");
 
         mQuery = mCalorieIntakeFoodsRef
                 .orderBy("category", Query.Direction.ASCENDING)
@@ -287,7 +306,7 @@ public class FirestoreActivity extends AppCompatActivity implements
     //add food
     @Override
     public void onFoodAdding(Firefood food) {
-        addFood(mCalorieIntakeFoodsRef, food).addOnSuccessListener(this, new OnSuccessListener<Void>() {
+        addFood(mCalorieIntakeRef, mCalorieIntakeFoodsRef, food).addOnSuccessListener(this, new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.d(TAG, "-------Food added");
@@ -302,9 +321,22 @@ public class FirestoreActivity extends AppCompatActivity implements
         });
     }
 
-    private Task<Void> addFood(final CollectionReference foodsRef, final Firefood food){
+    private Task<Void> addFood(final DocumentReference intakeRef, final CollectionReference foodsRef, final Firefood food){
+        final DocumentReference foodRef = foodsRef.document();
         return mFirestore.runTransaction((transaction -> {
-            foodsRef.add(food);
+            //return null if not exists
+            Object temp = transaction.get(intakeRef).get("Total");
+            Double intakeTotalCal = 0.0;
+            if(temp == null){
+                Map<String, Double> total = new HashMap<>();
+                total.put("Total", intakeTotalCal);
+                transaction.set(intakeRef, total);
+            }else{
+                intakeTotalCal = (Double) temp;
+            }
+            intakeTotalCal += food.getTotalCal();
+            transaction.set(foodRef, food);
+            transaction.update(intakeRef, "Total", intakeTotalCal);
             return null;
         }));
     }
