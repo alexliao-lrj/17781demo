@@ -105,10 +105,19 @@ public class AddFoodDialogFragment extends DialogFragment implements View.OnClic
             addFoodListener.onFoodAdding(food);
         }
 
+        clearFields();
+
         dismiss();
     }
 
     public void onCancelClicked(View view) {
         dismiss();
+    }
+
+    private void clearFields(){
+        foodName.setText("");
+        foodPerCal.setText("");
+        foodServingSize.setText("");
+        foodCategory.setSelection(0);
     }
 }
