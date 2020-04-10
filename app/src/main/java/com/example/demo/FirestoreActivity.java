@@ -341,10 +341,22 @@ public class FirestoreActivity extends AppCompatActivity implements
         }));
     }
 
+    private Task<Void> deleteFood(final DocumentReference intakeRef, final CollectionReference foodsRef, final String foodId){
+        DocumentReference foodRef = foodsRef.document(foodId);
+        return mFirestore.runTransaction((transaction -> {
+            Double intakeTotalCal = (Double) transaction.get(intakeRef).get("Total");
+            Firefood food = transaction.get(foodRef).toObject(Firefood.class);
+            intakeTotalCal -= food.getTotalCal();
+            transaction.delete(foodRef);
+            transaction.update(intakeRef, "Total", intakeTotalCal);
+            return null;
+        }));
+    }
+
     //delete food
     @Override
     public void onFoodDeleting(CollectionReference foodsRef, String foodId) {
-        foodsRef.document(foodId).delete().addOnSuccessListener(this, new OnSuccessListener<Void>() {
+        deleteFood(mCalorieIntakeRef, foodsRef, foodId).addOnSuccessListener(this, new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.d(TAG, "-------Food deleted");
