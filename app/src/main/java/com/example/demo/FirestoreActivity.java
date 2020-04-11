@@ -135,19 +135,6 @@ public class FirestoreActivity extends AppCompatActivity implements
                 .document(userKey)
                 .collection(dateKey)
                 .document("calorieIntake");
-        /*
-        Map<String, Double> total = new HashMap<>();
-        total.put("Total", 230.0);
-        calorieIntake.set(total);
-         */
-        mCalorieIntakeRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Double res = (Double) documentSnapshot.get("Total");
-                System.out.println("Total: " + res);
-            }
-        });
-
         mCalorieIntakeFoodsRef = mCalorieIntakeRef.collection("foods");
 
         mQuery = mCalorieIntakeFoodsRef
@@ -270,12 +257,12 @@ public class FirestoreActivity extends AppCompatActivity implements
         updateFoodDialog.show(getSupportFragmentManager(), UpdateFoodDialogFragment.TAG);
     }
 
-    private Task<Void> updateFood(final DocumentReference intakeRef, final DocumentReference foodRef, final Firefood food){
+    private Task<Void> updateFood(final DocumentReference intakeRef, final DocumentReference oldFoodRef, final Firefood food){
         return mFirestore.runTransaction((transaction -> {
             Double intakeTotalCal = (Double) transaction.get(intakeRef).get("Total");
-            Double foodTotalCal = (Double) transaction.get(foodRef).get("totalCal");
+            Double foodTotalCal = (Double) transaction.get(oldFoodRef).get("totalCal");
             intakeTotalCal = intakeTotalCal - foodTotalCal + food.getTotalCal();
-            transaction.set(foodRef, food);
+            transaction.set(oldFoodRef, food);
             transaction.update(intakeRef, "Total", intakeTotalCal);
             return null;
         }));

@@ -16,14 +16,18 @@ import com.example.demo.model.Firesport;
 import com.example.demo.viewmodel.FirestoreActivityViewModel;
 import com.example.demo.viewmodel.SportActivityViewModel;
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SportActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
@@ -33,6 +37,7 @@ public class SportActivity extends AppCompatActivity {
     private FirebaseFirestore mFirestore;
     private Query mQuery;
     private CollectionReference mCalorieBurnSportsRef;
+    private DocumentReference mCalorieBurnRef;
 
     private SportActivityViewModel mViewModel;
 
@@ -70,12 +75,12 @@ public class SportActivity extends AppCompatActivity {
         mFirestore = FirebaseFirestore.getInstance();
         String userKey = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         String dateKey = LocalDate.now().toString();
-        mCalorieBurnSportsRef = mFirestore
+        mCalorieBurnRef = mFirestore
                 .collection("users")
                 .document(userKey)
                 .collection(dateKey)
-                .document("calorieBurn")
-                .collection("sports");
+                .document("calorieBurn");
+        mCalorieBurnSportsRef = mCalorieBurnRef.collection("sports");
 
         mQuery = mCalorieBurnSportsRef
                 .orderBy("timestamp", Query.Direction.ASCENDING)
@@ -90,6 +95,52 @@ public class SportActivity extends AppCompatActivity {
             Firesport sport = new Firesport(sn[i], tc[i]);
             mCalorieBurnSportsRef.add(sport);
         }
+    }
+
+    //add sport transactions
+    private Task<Void> addSport(final DocumentReference burnRef, Firesport sport){
+        final DocumentReference sportRef = burnRef.collection("sports").document();
+        return mFirestore.runTransaction((transaction -> {
+            //return null if not exists
+            Object temp = transaction.get(burnRef).get("Total");
+            Double burnTotalCal = 0.0;
+            if(temp == null){
+                Map<String, Double> total = new HashMap<>();
+                total.put("Total", burnTotalCal);
+                transaction.set(burnRef, total);
+            }else{
+                burnTotalCal = (Double) temp;
+            }
+            burnTotalCal += sport.getTotalCal();
+            transaction.set(sportRef, sport);
+            transaction.update(burnRef, "Total", burnTotalCal);
+            return null;
+        }));
+    }
+
+    //delete sport transaction
+    private Task<Void> deleteSport(final DocumentReference burnRef, String sportId){
+        DocumentReference sportRef = burnRef.collection("sports").document(sportId);
+        return mFirestore.runTransaction((transaction -> {
+            Double intakeTotalCal = (Double) transaction.get(burnRef).get("Total");
+            Firesport sport = transaction.get(sportRef).toObject(Firesport.class);
+            intakeTotalCal -= sport.getTotalCal();
+            transaction.delete(sportRef);
+            transaction.update(burnRef, "Total", intakeTotalCal);
+            return null;
+        }));
+    }
+
+    //update sport transaction
+    private Task<Void> updateSport(final DocumentReference burnRef, final DocumentReference oldSportRef, Firesport sport){
+        return mFirestore.runTransaction((transaction -> {
+            Double burnTotalCal = (Double) transaction.get(burnRef).get("Total");
+            Double sportTotalCal = (Double) transaction.get(oldSportRef).get("totalCal");
+            burnTotalCal = burnTotalCal - sportTotalCal + sport.getTotalCal();
+            transaction.set(oldSportRef, sport);
+            transaction.update(burnRef, "Total", burnTotalCal);
+            return null;
+        }));
     }
 
     @Override
