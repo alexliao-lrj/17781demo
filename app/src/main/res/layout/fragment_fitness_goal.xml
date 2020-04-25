@@ -28,7 +28,7 @@
                     android:id="@+id/me_mealplanpage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white"
+                    android:background="@color/colorPrimary"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:padding="20dp">
@@ -47,10 +47,10 @@
                         android:layout_marginLeft="20dp"
                         android:ellipsize="start"
                         android:maxWidth="200dp"
+                        android:singleLine="true"
                         android:text="Flying Hamster"
-                        android:textColor="@android:color/black"
-                        android:textSize="24sp"
-                        android:singleLine="true" />
+                        android:textColor="@android:color/primary_text_dark"
+                        android:textSize="24sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -63,14 +63,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Home"
-                            android:textColor="@android:color/background_light"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="16sp" />
 
                         <ImageView
                             android:layout_width="14dp"
                             android:layout_height="14dp"
                             android:layout_gravity="center_vertical"
-                            android:src="@drawable/ic_common_right_arrow" />
+                            android:src="@drawable/ic_common_right_white_arrow_32" />
                     </LinearLayout>
                 </LinearLayout>
                 <!--me_top-->
