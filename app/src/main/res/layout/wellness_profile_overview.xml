@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Wellness Profile"
-                android:textColor="@color/black"
+                android:textColor="#000000"
                 android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
@@ -55,7 +55,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+                android:background="#000000"
                 android:gravity="center_horizontal">
                 <!-- A CardView that contains a TextView -->
                 <androidx.cardview.widget.CardView

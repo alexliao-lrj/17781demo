@@ -79,7 +79,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white">
+                    android:background="#FFFFFF">
                     <!-- A CardView that contains a TextView -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card_view"
@@ -140,11 +140,11 @@
                         <TextView
                             android:layout_width="310dp"
                             android:layout_height="0.2dp"
-                            android:layout_marginTop="58dp"
                             android:layout_gravity="center_horizontal"
-                            android:backgroundTint="@color/light_gray"
+                            android:layout_marginTop="58dp"
                             android:layout_weight="0"
-                            android:background="@android:color/black" />
+                            android:background="@android:color/black"
+                            android:backgroundTint="#2E2D2D" />
 
                         <!--Fitness Goal-->
                         <LinearLayout
@@ -192,7 +192,7 @@
                             android:layout_width="310dp"
                             android:layout_height="0.1dp"
                             android:layout_marginTop="116dp"
-                            android:backgroundTint="@color/light_gray"
+                            android:backgroundTint="#2E2D2D"
                             android:layout_gravity="center_horizontal"
                             android:layout_weight="0"
                             android:background="@android:color/black" />
