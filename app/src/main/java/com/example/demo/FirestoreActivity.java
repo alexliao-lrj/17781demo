@@ -41,6 +41,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+//food activity
 public class FirestoreActivity extends AppCompatActivity implements
         FirefoodAdapter.OnFoodSelectedListener,
         UpdateFoodDialogFragment.UpdateFoodListner,
@@ -152,6 +153,7 @@ public class FirestoreActivity extends AppCompatActivity implements
          */
     }
 
+    //frontend recycler view
     private void initRecyclerView(){
         if (mQuery == null) {
             Log.w(TAG, "No query, not initializing RecyclerView");

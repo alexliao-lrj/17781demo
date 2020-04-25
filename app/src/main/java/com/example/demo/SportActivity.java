@@ -3,25 +3,30 @@ package com.example.demo;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.demo.model.Firefood;
+import com.example.demo.adapter.FiresportAdapter;
 import com.example.demo.model.Firesport;
-import com.example.demo.viewmodel.FirestoreActivityViewModel;
 import com.example.demo.viewmodel.SportActivityViewModel;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 
 import java.time.LocalDate;
@@ -29,10 +34,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SportActivity extends AppCompatActivity {
+public class SportActivity extends AppCompatActivity implements FiresportAdapter.OnSportSelectedListener{
     private static final int RC_SIGN_IN = 9001;
 
     private static final int LIMIT = 50;
+
+    private static final String TAG = "FiresportActivity";
 
     private FirebaseFirestore mFirestore;
     private Query mQuery;
@@ -40,6 +47,8 @@ public class SportActivity extends AppCompatActivity {
     private DocumentReference mCalorieBurnRef;
 
     private SportActivityViewModel mViewModel;
+    private FiresportAdapter mAdapter;
+    private RecyclerView mFiresportRecycler;
 
     private Toolbar toolbar;
     private FloatingActionButton addBtn;
@@ -53,6 +62,7 @@ public class SportActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mViewModel = new ViewModelProvider(this).get(SportActivityViewModel.class);
+        mFiresportRecycler = findViewById(R.id.recycler_firesport);
 
         //start sign in if necessary
         if (shouldStartSignIn()) {
@@ -85,6 +95,24 @@ public class SportActivity extends AppCompatActivity {
         mQuery = mCalorieBurnSportsRef
                 .orderBy("timestamp", Query.Direction.ASCENDING)
                 .limit(LIMIT);
+    }
+
+    private void initRecyclerView(){
+        if (mQuery == null) {
+            Log.w(TAG, "No query, not initializing RecyclerView");
+        }
+
+        mAdapter = new FiresportAdapter(mQuery, this) {
+            @Override
+            protected void onError(FirebaseFirestoreException e) {
+                // Show a snackbar on errors
+                Snackbar.make(findViewById(android.R.id.content),
+                        "Error: check logs for info.", Snackbar.LENGTH_LONG).show();
+            }
+        };
+
+        mFiresportRecycler.setLayoutManager(new LinearLayoutManager(this));
+        mFiresportRecycler.setAdapter(mAdapter);
     }
 
     private void onAddItemsClicked() {
@@ -207,5 +235,10 @@ public class SportActivity extends AppCompatActivity {
                 startSignIn();
             }
         }
+    }
+
+    @Override
+    public void onSportSelected(DocumentSnapshot sport) {
+
     }
 }

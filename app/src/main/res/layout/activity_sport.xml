@@ -10,6 +10,17 @@
         android:id="@+id/top_toolbar"
         layout="@layout/top_toolbar" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_firesport"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_toolbar"
+        android:background="@android:color/white"
+        tools:listitem="@layout/sport_item"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_sport_button"
         android:layout_width="wrap_content"

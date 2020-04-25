@@ -6,23 +6,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.demo.R;
-import com.example.demo.model.Firefood;
+import com.example.demo.model.Firesport;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
 
-public class FirefoodAdapter extends FirestoreAdapter<FirefoodAdapter.ViewHolder> {
+public class FiresportAdapter extends FirestoreAdapter<FiresportAdapter.ViewHolder> {
 
-    public interface OnFoodSelectedListener{
-        void onFoodSelected(DocumentSnapshot food);
+    public interface OnSportSelectedListener{
+        void onSportSelected(DocumentSnapshot sport);
     }
 
-    private OnFoodSelectedListener mListener;
+    private FiresportAdapter.OnSportSelectedListener mListener;
 
-    public FirefoodAdapter(Query query, OnFoodSelectedListener listener) {
+    public FiresportAdapter(Query query, FiresportAdapter.OnSportSelectedListener listener) {
         super(query);
         mListener = listener;
     }
@@ -31,7 +30,7 @@ public class FirefoodAdapter extends FirestoreAdapter<FirefoodAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return new ViewHolder(inflater.inflate(R.layout.food_item, parent, false));
+        return new FiresportAdapter.ViewHolder(inflater.inflate(R.layout.sport_item, parent, false));
     }
 
     @Override
@@ -39,28 +38,24 @@ public class FirefoodAdapter extends FirestoreAdapter<FirefoodAdapter.ViewHolder
         holder.bind(getSnapshot(position), mListener);
     }
 
-    //a food item view
+    //a sport item view
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView foodNameView;
-        TextView totalCalView;
+        //声明xml中的views
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            totalCalView = itemView.findViewById(R.id.item_foodCal);
-            foodNameView = itemView.findViewById(R.id.item_foodName);
+            //initialize views in sport_item.xml
         }
 
-        public void bind(final DocumentSnapshot snapshot, final OnFoodSelectedListener listener){
-            Firefood food = snapshot.toObject(Firefood.class);
-            foodNameView.setText(food.getName());
-            totalCalView.setText(String.valueOf(food.getTotalCal()));
+        public void bind(final DocumentSnapshot snapshot, final FiresportAdapter.OnSportSelectedListener listener){
+            Firesport sport = snapshot.toObject(Firesport.class);
 
             // Click listener
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (listener != null) {
-                        listener.onFoodSelected(snapshot);
+                        listener.onSportSelected(snapshot);
                     }
                 }
             });

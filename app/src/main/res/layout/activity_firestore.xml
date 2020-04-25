@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".FirestoreActivity">
 
+    <!--food activity xml-->
     <include
         android:id="@+id/top_toolbar"
         layout="@layout/top_toolbar" />
