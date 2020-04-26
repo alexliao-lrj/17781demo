@@ -3,6 +3,7 @@ package com.example.demo.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,14 +42,22 @@ public class FiresportAdapter extends FirestoreAdapter<FiresportAdapter.ViewHold
     //a sport item view
     static class ViewHolder extends RecyclerView.ViewHolder{
         //声明xml中的views
+        TextView sportName;
+        TextView sportCalorie;
+        ImageView sportImg;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //initialize views in sport_item.xml
+            sportName = itemView.findViewById(R.id.item_sportName);
+            sportCalorie = itemView.findViewById(R.id.item_sportCalorie);
+            sportImg = itemView.findViewById(R.id.item_sportImg);
         }
 
         public void bind(final DocumentSnapshot snapshot, final FiresportAdapter.OnSportSelectedListener listener){
             Firesport sport = snapshot.toObject(Firesport.class);
+            sportName.setText(sport.getName());
+            sportCalorie.setText(String.valueOf(sport.getTotalCal()));
 
             // Click listener
             itemView.setOnClickListener(new View.OnClickListener() {
