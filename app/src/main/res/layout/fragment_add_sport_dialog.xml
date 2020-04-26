@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/corners_bg"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".AddSportDialogFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="300dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/add_sport_title"
+            style="@style/AppTheme.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Add Sport"
+            android:textAlignment="center"
+            android:textColor="#6E6E6E"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/sport_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/sport_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:ems="10"
+            android:hint="Sport Name"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@id/per_cal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_sport_title" />
+
+        <EditText
+            android:id="@+id/sport_calorie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:ems="10"
+            android:hint="Total calories burnt"
+            android:inputType="number|numberDecimal"
+            app:layout_constraintBottom_toTopOf="@id/add_sport_submit"
+            app:layout_constraintEnd_toEndOf="@id/sport_name"
+            app:layout_constraintStart_toStartOf="@id/sport_name"
+            app:layout_constraintTop_toBottomOf="@id/sport_name" />
+
+        <Spinner
+            android:id="@+id/spinner_category_sport"
+            style="@style/AppTheme.FilterSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:entries="@array/sport_categories"
+            app:layout_constraintBottom_toTopOf="@id/add_sport_submit"
+            app:layout_constraintEnd_toEndOf="@id/sport_name"
+            app:layout_constraintStart_toStartOf="@id/sport_name"
+            app:layout_constraintTop_toBottomOf="@id/sport_calorie" />
+
+        <LinearLayout
+            android:id="@+id/add_sport_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/sport_name"
+            app:layout_constraintStart_toStartOf="@id/sport_name"
+            app:layout_constraintTop_toBottomOf="@id/sport_calorie">
+
+            <Button
+                android:id="@+id/cancel_add_sport"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_weight="1"
+                android:background="#F3EDED"
+                android:backgroundTint="#E3E0E0"
+                android:text="Cancel" />
+
+
+            <Button
+                android:id="@+id/submit_add_sport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Submit" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

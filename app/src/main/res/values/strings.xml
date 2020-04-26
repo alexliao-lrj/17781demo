@@ -7,6 +7,7 @@
     <string name="update_food_title">Change Food Info</string>
 
     <string name="value_any_category">Choose a Meal</string>
+    <string name="value_sport_category">Choose a Sport</string>
 
     <string-array name="meal_categories">
         <item>@string/value_any_category</item>
@@ -15,6 +16,22 @@
         <item>Lunch</item>
         <item>Dinner</item>
         <item>Snack</item>
+    </string-array>
+
+    <string-array name="sport_categories">
+        <item>@string/value_sport_category</item>
+
+        <item>Rope skipping</item>
+        <item>Walk</item>
+        <item>Running</item>
+        <item>Climb stairs</item>
+        <item>Swim</item>
+        <item>Ride bike</item>
+        <item>Dance</item>
+        <item>Yoga</item>
+        <item>Ball game</item>
+        <item>Skateboard</item>
+        <item>Skiing</item>
     </string-array>
 
 </resources>

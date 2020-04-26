@@ -57,7 +57,31 @@ public class FiresportAdapter extends FirestoreAdapter<FiresportAdapter.ViewHold
         public void bind(final DocumentSnapshot snapshot, final FiresportAdapter.OnSportSelectedListener listener){
             Firesport sport = snapshot.toObject(Firesport.class);
             sportName.setText(sport.getName());
-            sportCalorie.setText(String.valueOf(sport.getTotalCal()));
+            sportCalorie.setText(String.valueOf(sport.getTotalCal()) + " kcal");
+
+            if(sport.getCategory() == 1){
+                sportImg.setImageResource(R.drawable.rope_skipping);
+            }else if(sport.getCategory() == 2){
+                sportImg.setImageResource(R.drawable.walk);
+            }else if(sport.getCategory() == 3){
+                sportImg.setImageResource(R.drawable.running);
+            }else if(sport.getCategory() == 4){
+                sportImg.setImageResource(R.drawable.stairs);
+            }else if(sport.getCategory() == 5){
+                sportImg.setImageResource(R.drawable.swim);
+            }else if(sport.getCategory() == 6){
+                sportImg.setImageResource(R.drawable.bike);
+            }else if(sport.getCategory() == 7){
+                sportImg.setImageResource(R.drawable.dance);
+            }else if(sport.getCategory() == 8){
+                sportImg.setImageResource(R.drawable.yoga);
+            }else if(sport.getCategory() == 9){
+                sportImg.setImageResource(R.drawable.ball_game);
+            }else if(sport.getCategory() == 11){
+                sportImg.setImageResource(R.drawable.ski);
+            }else if(sport.getCategory() == 10){
+                sportImg.setImageResource(R.drawable.skate_board);
+            }
 
             // Click listener
             itemView.setOnClickListener(new View.OnClickListener() {

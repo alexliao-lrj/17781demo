@@ -76,19 +76,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="190dp"
-            android:layout_marginTop="12dp"
-            android:layout_toEndOf="@id/item_serving"
+            android:layout_marginLeft="280dp"
+            android:layout_marginTop="10dp"
             android:text="Category"
             android:textSize="20dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/item_foodCal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="265dp"
+            android:layout_marginLeft="280dp"
             android:layout_marginTop="50dp"
             android:text="Calorie / kcal"
             android:textSize="18dp"

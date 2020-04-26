@@ -5,7 +5,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.gms.tasks.OnSuccessListener;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.example.demo.adapter.FiresportAdapter;
 import com.example.demo.model.Firesport;
@@ -34,7 +37,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SportActivity extends AppCompatActivity implements FiresportAdapter.OnSportSelectedListener{
+// sport activity
+public class SportActivity extends AppCompatActivity implements
+        FiresportAdapter.OnSportSelectedListener,
+        AddSportDialogFragment.OnAddSportListener{
     private static final int RC_SIGN_IN = 9001;
 
     private static final int LIMIT = 50;
@@ -50,6 +56,7 @@ public class SportActivity extends AppCompatActivity implements FiresportAdapter
     private FiresportAdapter mAdapter;
     private RecyclerView mFiresportRecycler;
 
+    private AddSportDialogFragment addSportDialog;
     private Toolbar toolbar;
     private FloatingActionButton addBtn;
 
@@ -70,12 +77,16 @@ public class SportActivity extends AppCompatActivity implements FiresportAdapter
         }
 
         initFirestore();
+        initRecyclerView(); //
+
+        addSportDialog = new AddSportDialogFragment();//
 
         addBtn = findViewById(R.id.add_sport_button);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onAddItemsClicked();
+                //onAddItemsClicked();
+                addSportItem();
             }
         });
 
@@ -119,14 +130,15 @@ public class SportActivity extends AppCompatActivity implements FiresportAdapter
         // TODO(developer): Add random foods
         String[] sn = {"Ellipticals", "Walking", "Running", "Zumba", "305Fitness"};
         double[] tc = {432, 212, 245, 320, 280};
+        int[] ca = {1, 2, 3, 4, 5};
         for(int i = 0; i < 5; i++){
-            Firesport sport = new Firesport(sn[i], tc[i]);
+            Firesport sport = new Firesport(sn[i], tc[i], ca[i]);
             mCalorieBurnSportsRef.add(sport);
         }
     }
 
     //add sport transactions
-    private Task<Void> addSport(final DocumentReference burnRef, Firesport sport){
+    private Task<Void> addSport(final DocumentReference burnRef, CollectionReference mCalorieBurnSportsRef, Firesport sport){
         final DocumentReference sportRef = burnRef.collection("sports").document();
         return mFirestore.runTransaction((transaction -> {
             //return null if not exists
@@ -171,6 +183,10 @@ public class SportActivity extends AppCompatActivity implements FiresportAdapter
         }));
     }
 
+    private void addSportItem(){//
+        addSportDialog.show(getSupportFragmentManager(), AddSportDialogFragment.TAG);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -207,6 +223,18 @@ public class SportActivity extends AppCompatActivity implements FiresportAdapter
             return;
         }
 
+        // Start listening for Firestore updates
+        if (mAdapter != null) {
+            mAdapter.startListening();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAdapter != null) {
+            mAdapter.stopListening();
+        }
     }
 
     private boolean shouldStartSignIn() {
@@ -237,8 +265,36 @@ public class SportActivity extends AppCompatActivity implements FiresportAdapter
         }
     }
 
+
     @Override
     public void onSportSelected(DocumentSnapshot sport) {
+    }
 
+    // override by yawei
+
+    private void hideKeyboard() {
+        View view = getCurrentFocus();
+        if (view != null) {
+            ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    // add sport
+    @Override
+    public void onSportAdding(Firesport sport) {
+        addSport(mCalorieBurnRef, mCalorieBurnSportsRef, sport).addOnSuccessListener(this, new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "-------Sport added");
+                hideKeyboard();
+                mFiresportRecycler.smoothScrollToPosition(0);
+            }
+        }).addOnFailureListener(this, (e)->{
+            Log.w(TAG, "--------Sport add failed", e);
+            hideKeyboard();
+            Snackbar.make(findViewById(android.R.id.content), "Failed to add sport, Retry.",
+                    Snackbar.LENGTH_SHORT).show();
+        });
     }
 }

@@ -47,14 +47,15 @@
         <!--            android:layout_height="wrap_content"-->
         <!--            android:layout_margin="4dp"-->
         <!--            android:background="#FFFFFF">-->
+
+
         <ImageView
             android:id="@+id/item_sportImg"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/fitness_round" />
-
+            android:src="@drawable/other_sport" />
 
         <TextView
             android:id="@+id/item_sportName"
@@ -66,7 +67,7 @@
             android:layout_marginTop="1dp"
             android:layout_toEndOf="@id/item_sportImg"
             android:text="Sport Name"
-            android:textSize="24dp"
+            android:textSize="22dp"
             android:textStyle="bold" />
 
         <TextView
@@ -74,11 +75,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="88dp"
+            android:layout_marginLeft="280dp"
             android:layout_marginTop="3dp"
-            android:layout_toEndOf="@id/item_sportName"
             android:text="Category"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textStyle="italic" />
 
 

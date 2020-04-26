@@ -12,14 +12,17 @@ public class Firesport {
     private String name;
     //total calorie burn
     private double totalCal;
+    //sport category
+    private int category;
     //datetime
     private @ServerTimestamp Date timestamp;
 
     public Firesport(){}
 
-    public Firesport(String name, double totalCal) {
+    public Firesport(String name, double totalCal, int category) {
         this.name = name;
         this.totalCal = totalCal;
+        this.category = category;
     }
 
     public String getName() {
@@ -36,6 +39,14 @@ public class Firesport {
 
     public void setTotalCal(double totalCal) {
         this.totalCal = totalCal;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
     }
 
     public Date getTimestamp() {
