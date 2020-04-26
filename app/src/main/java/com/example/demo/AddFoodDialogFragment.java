@@ -1,6 +1,8 @@
 package com.example.demo;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
@@ -47,6 +49,7 @@ public class AddFoodDialogFragment extends DialogFragment implements View.OnClic
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_add_food_dialog, container, false);
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         foodName = v.findViewById(R.id.food_name);
         foodPerCal = v.findViewById(R.id.per_cal);
         foodServingSize = v.findViewById(R.id.serving_size);
