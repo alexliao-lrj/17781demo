@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -66,260 +67,373 @@
                 </LinearLayout>
                 <!--me_top-->
 
-                <!--data section-->
-                <LinearLayout
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@android:color/white"
-                    android:orientation="vertical">
+                    android:layout_height="450dp"
+                    android:background="#FFFFFF">
+                    <!-- A CardView that contains a TextView -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view2"
+                        android:layout_width="390dp"
+                        android:layout_height="450dp"
+                        android:layout_centerInParent="true"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="5dp"
+                        app:contentPaddingBottom="12dp"
+                        app:contentPaddingLeft="12dp"
+                        app:contentPaddingRight="12dp"
+                        app:contentPaddingTop="3dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginTop="20dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:padding="10dp">
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="3dp">
+
+                            <LinearLayout
+                                android:id="@+id/home_wellness_profile"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:padding="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="220dp"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="3dp"
+                                    android:paddingLeft="0dp"
+                                    android:text="Health Data"
+                                    android:textColor="#6d6d6d"
+                                    android:textStyle="bold"
+                                    android:textSize="22dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!--Current Weight-->
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Health Data"
-                            android:textAlignment="center"
-                            android:textSize="14sp"
-                            android:textColor="@android:color/black" />
+                            android:layout_width="325dp"
+                            android:layout_height="0.2dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="58dp"
+                            android:layout_weight="0"
+                            android:background="@android:color/black"
+                            android:backgroundTint="#2E2D2D" />
 
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0.2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@android:color/darker_gray" />
-
-                    <!--gender-->
-                    <LinearLayout
-                        android:id="@+id/healthdata_gender"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp">
-
+                        <!--Calorie Intake-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:padding="10dp">
+                            android:orientation="horizontal"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="62dp">
 
-                            <TextView
-                                android:layout_width="0dp"
+                            <LinearLayout
+                                android:id="@+id/healthdata_gender"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Gender"
-                                android:textSize="14sp"
-                                android:textColor="@android:color/black"/>
+                                android:gravity="center_vertical"
+                                android:padding="10dp"
+                                android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_marginRight="25dp"
-                                android:textAlignment="textStart"
-                                android:text="Female"/>
+                                <TextView
+                                    android:id="@+id/info_text"
+                                    android:layout_width="220dp"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="3dp"
+                                    android:paddingLeft="0dp"
+                                    android:text="Gender"
+                                    android:textColor="#404040"
+                                    android:textSize="18dp" />
+                                <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Female"
+                                    android:layout_marginLeft="29dp"
+                                    android:textAlignment="textStart" />
 
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="15dp"
+                                    android:src="@drawable/ic_common_right_arrow" />
+                            </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
 
-                    <!-- birth -->
-                    <LinearLayout
-                        android:id="@+id/healthdata_birth"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp">
+                        <!--Separation-->
+                        <TextView
+                            android:layout_width="325dp"
+                            android:layout_height="0.2dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="58dp"
+                            android:layout_weight="0"
+                            android:background="#bdbdbd"
+                            android:backgroundTint="#bdbdbd" />
 
+                        <!--Calorie Intake-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:padding="10dp">
+                            android:orientation="horizontal"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="120dp">
 
-                            <TextView
-                                android:layout_width="0dp"
+                            <LinearLayout
+                                android:id="@+id/healthdata_birth"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Birth"
-                                android:textSize="14sp"
-                                android:textColor="@android:color/black"/>
+                                android:gravity="center_vertical"
+                                android:padding="10dp"
+                                android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_marginRight="25dp"
-                                android:textAlignment="textStart"
-                                android:text="11/11/1995"/>
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="3dp"
+                                    android:paddingLeft="0dp"
+                                    android:text="Birth"
+                                    android:textColor="#404040"
+                                    android:textSize="18dp" />
+                                <TextView
+                                    android:layout_width="85dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="11/11/1995"
+                                    android:layout_marginLeft="100dp"
+                                    android:textAlignment="textStart" />
 
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginLeft="4dp"
+                                    android:layout_marginRight="15dp"
+                                    android:src="@drawable/ic_common_right_arrow" />
+                            </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
 
-                    <!-- BMI -->
-                    <LinearLayout
-                        android:id="@+id/healthdata_bmi"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp">
+                        <!--Separation-->
+                        <TextView
+                            android:layout_width="325dp"
+                            android:layout_height="0.1dp"
+                            android:layout_marginTop="116dp"
+                            android:backgroundTint="#bdbdbd"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="0"
+                            android:background="#bdbdbd" />
 
+                        <!--Separation-->
+                        <TextView
+                            android:layout_width="325dp"
+                            android:layout_height="0.2dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="174dp"
+                            android:layout_weight="0"
+                            android:background="#bdbdbd"
+                            android:backgroundTint="#bdbdbd" />
+
+                        <!--Calorie Burnt-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:padding="10dp">
+                            android:orientation="horizontal"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="178dp">
 
-                            <TextView
-                                android:layout_width="0dp"
+                            <LinearLayout
+                                android:id="@+id/healthdata_bmi"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Your BMI"
-                                android:textSize="14sp"
-                                android:textColor="@android:color/black" />
+                                android:gravity="center_vertical"
+                                android:padding="10dp"
+                                android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_marginRight="25dp"
-                                android:textAlignment="textStart"
-                                android:text="20.1"/>
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="3dp"
+                                    android:paddingLeft="0dp"
+                                    android:text="Your BMI"
+                                    android:textColor="#404040"
+                                    android:textSize="18dp" />
+                                <TextView
+                                    android:layout_width="30dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="20.1"
+                                    android:layout_marginLeft="148dp"
+                                    android:textAlignment="textStart" />
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="15dp"
+                                    android:src="@drawable/ic_common_right_arrow" />
+                            </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
+                        <!--Separation-->
+                        <TextView
+                            android:layout_width="325dp"
+                            android:layout_height="0.2dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="230dp"
+                            android:layout_weight="0"
+                            android:background="#bdbdbd"
+                            android:backgroundTint="#bdbdbd" />
 
-                    <!-- height -->
-                    <LinearLayout
-                        android:id="@+id/healthdata_height"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp">
-
+                        <!--Calorie Burnt-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:padding="10dp">
+                            android:orientation="horizontal"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="230dp">
 
-                            <TextView
-                                android:layout_width="0dp"
+                            <LinearLayout
+                                android:id="@+id/height"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Height"
-                                android:textSize="14sp"
-                                android:textColor="@android:color/black" />
+                                android:gravity="center_vertical"
+                                android:padding="10dp"
+                                android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textAlignment="textStart"
-                                android:text="163 cm"/>
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="3dp"
+                                    android:paddingLeft="0dp"
+                                    android:text="Height"
+                                    android:textColor="#404040"
+                                    android:textSize="18dp" />
+                                <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="163cm"
+                                    android:layout_marginLeft="132dp"
+                                    android:textAlignment="textStart" />
 
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_margin="5dp"
-                                android:src="@drawable/ic_common_right_arrow" />
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginRight="15dp"
+                                    android:src="@drawable/ic_common_right_arrow" />
+                            </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
 
-                    <!-- cur weight -->
-                    <LinearLayout
-                        android:id="@+id/healthdata_weight"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp">
+                        <!--Separation-->
+                        <TextView
+                            android:layout_width="325dp"
+                            android:layout_height="0.2dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="285dp"
+                            android:layout_weight="0"
+                            android:background="#bdbdbd"
+                            android:backgroundTint="#bdbdbd" />
 
+                        <!--Calorie Burnt-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:padding="10dp">
+                            android:orientation="horizontal"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="285dp">
 
-                            <TextView
-                                android:layout_width="0dp"
+                            <LinearLayout
+                                android:id="@+id/current_weight"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Current Weight"
-                                android:textSize="14sp"
-                                android:textColor="@android:color/black" />
+                                android:gravity="center_vertical"
+                                android:padding="10dp"
+                                android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textAlignment="textStart"
-                                android:text="120 lbs"/>
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="3dp"
+                                    android:paddingLeft="0dp"
+                                    android:text="Current Weight"
+                                    android:textColor="#404040"
+                                    android:textSize="18dp" />
+                                <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="120lbs"
+                                    android:layout_marginLeft="132dp"
+                                    android:textAlignment="textStart" />
 
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_margin="5dp"
-                                android:src="@drawable/ic_common_right_arrow" />
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginRight="15dp"
+                                    android:src="@drawable/ic_common_right_arrow" />
+                            </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
 
-                    <!-- target weight -->
-                    <LinearLayout
-                        android:id="@+id/healthdata_target_weight"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp">
+                        <!--Separation-->
+                        <TextView
+                            android:layout_width="325dp"
+                            android:layout_height="0.2dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="340dp"
+                            android:layout_weight="0"
+                            android:background="#bdbdbd"
+                            android:backgroundTint="#bdbdbd" />
 
+                        <!--Calorie Burnt-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:padding="10dp">
+                            android:orientation="horizontal"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="345dp">
 
-                            <TextView
-                                android:layout_width="0dp"
+                            <LinearLayout
+                                android:id="@+id/target_weight"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Target Weight"
-                                android:textSize="14sp"
-                                android:textColor="@android:color/black" />
+                                android:gravity="center_vertical"
+                                android:padding="10dp"
+                                android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textAlignment="textStart"
-                                android:text="110 lbs"/>
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="3dp"
+                                    android:paddingLeft="0dp"
+                                    android:text="Target Weight"
+                                    android:textColor="#404040"
+                                    android:textSize="18dp" />
+                                <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="110lbs"
+                                    android:layout_marginLeft="132dp"
+                                    android:textAlignment="textStart" />
 
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_margin="5dp"
-                                android:src="@drawable/ic_common_right_arrow" />
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginRight="15dp"
+                                    android:src="@drawable/ic_common_right_arrow" />
+                            </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
 
-                </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
 
 
             </LinearLayout>
