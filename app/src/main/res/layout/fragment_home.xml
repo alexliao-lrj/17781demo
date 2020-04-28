@@ -302,7 +302,7 @@
                                     android:text="Wellness Profile"
                                     android:textColor="#6d6d6d"
                                     android:textStyle="bold"
-                                    android:textSize="24dp" />
+                                    android:textSize="18dp" />
                             </LinearLayout>
                         </LinearLayout>
 

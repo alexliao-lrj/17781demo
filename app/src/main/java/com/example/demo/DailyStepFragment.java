@@ -21,6 +21,7 @@ public class DailyStepFragment extends Fragment {
 
     TextView step;
     TextView step_progress;
+    TextView calorieStep;
 
     public DailyStepFragment() {
         // Required empty public constructor
@@ -35,15 +36,19 @@ public class DailyStepFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_daily_step, container, false);
         step = v.findViewById(R.id.textView2);
         step_progress = v.findViewById(R.id.step_progress);
+        calorieStep = v.findViewById(R.id.textView3);
         Random random = new Random();
         int maxV = 5012;
         int minV = 5011;
         int stepCount = random.nextInt(maxV) % (maxV - minV + 1) + minV;
+        double caloriePerMile = 0.078;
         step.setText("Walk " + stepCount + " steps");
         step_progress.setText(String.valueOf(stepCount));
+        calorieStep.setText("Burned " + (int)(stepCount * caloriePerMile) + " kcal");
 
         ProgressBar progress = v.findViewById(R.id.circle_progress_bar);
-        progress.setProgress(62);
+        int prog = 66;
+        progress.setProgress(prog);
 
         return v;
     }
