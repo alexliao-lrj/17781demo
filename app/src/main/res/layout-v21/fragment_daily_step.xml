@@ -23,12 +23,49 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <ProgressBar
-                    android:id="@+id/DailyStepProgressBar"
-                    style="@android:style/Widget.Material.Light.ProgressBar.Large.Inverse"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp" />
+<!--                <ProgressBar-->
+<!--                    android:id="@+id/DailyStepProgressBar"-->
+<!--                    style="@android:style/Widget.Material.Light.ProgressBar.Large.Inverse"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="20dp" />-->
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center">
+
+                    <ProgressBar
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:indeterminate="false"
+                        android:max="100"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/circle_progress_background" />
+
+                    <TextView
+                        android:id="@+id/step_progress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="1234"
+                        android:textColor="#000000"
+                        android:textSize="28sp"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/circle_progress_bar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:indeterminate="false"
+                        android:max="100"
+                        android:progressDrawable="@drawable/circle_progress_foreground"
+                        android:rotation="-90" />
+
+                </RelativeLayout>
 
                 <View
                     android:id="@+id/divider"

@@ -55,6 +55,7 @@
             android:layout_height="25dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
+            android:layout_marginTop="6dp"
             android:src="@drawable/other_sport" />
 
         <TextView

@@ -81,278 +81,399 @@
                 </LinearLayout>
                 <!--me_top-->
 
-                <!--home up section-->
-                <LinearLayout
+                <!--Separation-->
+                <TextView
+                    android:layout_width="310dp"
+                    android:layout_height="0.2dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="0"/>
+
+                <!--Health Data; Fitness Goal; Meal Plan-->
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@android:color/white"
-                    android:orientation="vertical">
+                    android:background="#FFFFFF">
+                    <!-- A CardView that contains a TextView -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view"
+                        android:layout_width="370dp"
+                        android:layout_height="200dp"
+                        android:layout_centerInParent="true"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="10dp"
+                        app:contentPaddingBottom="12dp"
+                        app:contentPaddingLeft="12dp"
+                        app:contentPaddingRight="12dp"
+                        app:contentPaddingTop="12dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginTop="50dp">
 
-                    <!--balanced diet-->
-                    <LinearLayout
-                        android:id="@+id/home_healthdata"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp">
-
+                        <!--Health Data-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Health Data"
-                                android:textColor="@android:color/black"
-                                android:textSize="14sp" />
+                            android:orientation="horizontal"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="3dp">
 
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_margin="5dp"
-                                android:src="@drawable/ic_common_right_arrow" />
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="2dp"
+                                android:src="@drawable/icon_health_data" />
+
+                            <LinearLayout
+                                android:id="@+id/home_healthdata"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:padding="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="200dp"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="3dp"
+                                    android:text="Health Data"
+                                    android:textColor="#404040"
+                                    android:textSize="18dp" />
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginLeft="40dp"
+                                    android:layout_marginRight="15dp"
+                                    android:src="@drawable/ic_common_right_arrow" />
+                            </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
-                    <!--health data-->
 
-                    <LinearLayout
-                        android:id="@+id/home_fitnessgoal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp">
+                        <!--Separation-->
+                        <TextView
+                            android:layout_width="310dp"
+                            android:layout_height="0.2dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="58dp"
+                            android:layout_weight="0"
+                            android:background="@android:color/black"
+                            android:backgroundTint="#2E2D2D" />
 
+                        <!--Fitness Goal-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Fitness Goal"
-                                android:textColor="@android:color/black"
-                                android:textSize="14sp" />
+                            android:orientation="horizontal"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="62dp">
 
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_margin="5dp"
-                                android:src="@drawable/ic_common_right_arrow" />
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="2dp"
+                                android:src="@drawable/icon_heart_rate" />
+
+                            <LinearLayout
+                                android:id="@+id/home_fitnessgoal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:padding="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="276dp"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="3dp"
+                                    android:text="Fitness Goal"
+                                    android:textColor="#404040"
+                                    android:textSize="18dp" />
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginLeft="-36dp"
+                                    android:layout_marginRight="15dp"
+                                    android:src="@drawable/ic_common_right_arrow" />
+                            </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
 
-                    <!--meal plan-->
-                    <LinearLayout
-                        android:id="@+id/home_mealplan"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp">
+                        <!--Separation-->
+                        <TextView
+                            android:layout_width="310dp"
+                            android:layout_height="0.1dp"
+                            android:layout_marginTop="116dp"
+                            android:backgroundTint="#2E2D2D"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="0"
+                            android:background="@android:color/black" />
 
+                        <!--Meal Plan-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Meal Plan"
-                                android:textColor="@android:color/black"
-                                android:textSize="14sp" />
+                            android:orientation="horizontal"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="120dp">
 
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_margin="5dp"
-                                android:src="@drawable/ic_common_right_arrow" />
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="2dp"
+                                android:src="@drawable/icon_clock" />
+
+                            <LinearLayout
+                                android:id="@+id/home_mealplan"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:padding="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/meal_plan_info_text"
+                                    android:layout_width="200dp"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="3dp"
+                                    android:text="Meal Plan"
+                                    android:textColor="#404040"
+                                    android:textSize="18dp" />
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginLeft="40dp"
+                                    android:layout_marginRight="15dp"
+                                    android:src="@drawable/ic_common_right_arrow" />
+                            </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
 
-                </LinearLayout>
-
-                <!--wellness profile-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@android:color/white"
-                    android:orientation="vertical">
-                    <!--title-->
-                    <LinearLayout
-                        android:id="@+id/home_wellness_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Wellness Profile"
-                                android:textColor="@android:color/black"
-                                android:textSize="14sp" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-                    <!--title-->
-                    <!--split-->
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0.2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@android:color/darker_gray" />
-                    <!--split-->
-
-                    <!-- weight -->
-                    <LinearLayout
-                        android:id="@+id/home_wellness_weight"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Current Weight"
-                                android:textColor="@android:color/black"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="120 lbs"
-                                android:textAlignment="textStart" />
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_margin="5dp"
-                                android:src="@drawable/ic_common_right_arrow" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <!-- calorie intake -->
-                    <LinearLayout
-                        android:id="@+id/home_wellness_intake"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Calorie Intake"
-                                android:textColor="@android:color/black"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="600 / 1230 kcal"
-                                android:textAlignment="textStart" />
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_margin="5dp"
-                                android:src="@drawable/ic_common_right_arrow" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <!-- calorie burn -->
-                    <LinearLayout
-                        android:id="@+id/home_wellness_burn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Calorie Burned"
-                                android:textColor="@android:color/black"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="420 / 500 kcal"
-                                android:textAlignment="textStart" />
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_margin="5dp"
-                                android:src="@drawable/ic_common_right_arrow" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                </LinearLayout>
                 <!--comment/record-->
                 <!--exit-->
                 <!--exit-->
                 <!--version-->
                 <!--version-->
+
+                <!--wellness profile-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="290dp"
+                    android:background="#FFFFFF">
+                    <!-- A CardView that contains a TextView -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view2"
+                        android:layout_width="370dp"
+                        android:layout_height="240dp"
+                        android:layout_centerInParent="true"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="10dp"
+                        app:contentPaddingBottom="12dp"
+                        app:contentPaddingLeft="12dp"
+                        app:contentPaddingRight="12dp"
+                        app:contentPaddingTop="3dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginTop="20dp">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="3dp">
+
+                            <LinearLayout
+                                android:id="@+id/home_wellness_profile"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:padding="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="220dp"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="3dp"
+                                    android:paddingLeft="10dp"
+                                    android:text="Wellness Profile"
+                                    android:textColor="#6d6d6d"
+                                    android:textStyle="bold"
+                                    android:textSize="24dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!--Current Weight-->
+                        <TextView
+                            android:layout_width="310dp"
+                            android:layout_height="0.2dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="58dp"
+                            android:layout_weight="0"
+                            android:background="@android:color/black"
+                            android:backgroundTint="#2E2D2D" />
+
+                        <!--Calorie Intake-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="62dp">
+
+                            <LinearLayout
+                                android:id="@+id/home_wellness_weight"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:padding="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/info_text"
+                                    android:layout_width="220dp"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="3dp"
+                                    android:paddingLeft="10dp"
+                                    android:text="Current Weight"
+                                    android:textColor="#404040"
+                                    android:textSize="18dp" />
+                                <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="120 lbs"
+                                    android:layout_marginLeft="10dp"
+                                    android:textAlignment="textStart" />
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="15dp"
+                                    android:src="@drawable/ic_common_right_arrow" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!--Separation-->
+                        <TextView
+                            android:layout_width="310dp"
+                            android:layout_height="0.2dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="58dp"
+                            android:layout_weight="0"
+                            android:background="@android:color/black"
+                            android:backgroundTint="#2E2D2D" />
+
+                        <!--Calorie Intake-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="120dp">
+
+                            <LinearLayout
+                                android:id="@+id/home_wellness_intake"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:padding="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="3dp"
+                                    android:paddingLeft="10dp"
+                                    android:text="Calorie Intake"
+                                    android:textColor="#404040"
+                                    android:textSize="18dp" />
+                                <TextView
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="600 / 1230 kcal"
+                                    android:layout_marginLeft="60dp"
+                                    android:textAlignment="textStart" />
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="15dp"
+                                    android:src="@drawable/ic_common_right_arrow" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!--Separation-->
+                        <TextView
+                            android:layout_width="310dp"
+                            android:layout_height="0.1dp"
+                            android:layout_marginTop="116dp"
+                            android:backgroundTint="#2E2D2D"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="0"
+                            android:background="@android:color/black" />
+
+                        <!--Separation-->
+                        <TextView
+                            android:layout_width="310dp"
+                            android:layout_height="0.2dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="174dp"
+                            android:layout_weight="0"
+                            android:background="@android:color/black"
+                            android:backgroundTint="#2E2D2D" />
+
+                        <!--Calorie Burnt-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="178dp">
+
+                            <LinearLayout
+                                android:id="@+id/home_wellness_burn"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:padding="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="3dp"
+                                    android:paddingLeft="10dp"
+                                    android:text="Calorie Burned"
+                                    android:textColor="#404040"
+                                    android:textSize="18dp" />
+                                <TextView
+                                    android:layout_width="90dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="420 / 500 kcal"
+                                    android:layout_marginLeft="70dp"
+                                    android:textAlignment="textStart" />
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="15dp"
+                                    android:src="@drawable/ic_common_right_arrow" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+
+
+
 
 
             </LinearLayout>
