@@ -40,7 +40,8 @@ import java.util.Map;
 // sport activity
 public class SportActivity extends AppCompatActivity implements
         FiresportAdapter.OnSportSelectedListener,
-        AddSportDialogFragment.OnAddSportListener{
+        AddSportDialogFragment.OnAddSportListener,
+        UpdateSportDialogFragment.UpdateSportListener {
     private static final int RC_SIGN_IN = 9001;
 
     private static final int LIMIT = 50;
@@ -57,6 +58,7 @@ public class SportActivity extends AppCompatActivity implements
     private RecyclerView mFiresportRecycler;
 
     private AddSportDialogFragment addSportDialog;
+    private UpdateSportDialogFragment updateSportDialog;
     private Toolbar toolbar;
     private FloatingActionButton addBtn;
 
@@ -89,6 +91,8 @@ public class SportActivity extends AppCompatActivity implements
                 addSportItem();
             }
         });
+
+        updateSportDialog = new UpdateSportDialogFragment();
 
     }
 
@@ -268,6 +272,10 @@ public class SportActivity extends AppCompatActivity implements
 
     @Override
     public void onSportSelected(DocumentSnapshot sport) {
+        Bundle bundle = new Bundle();
+        bundle.putString(UpdateSportDialogFragment.KEY_SPORT_ID, sport.getId());
+        updateSportDialog.setArguments(bundle);
+        updateSportDialog.show(getSupportFragmentManager(), UpdateSportDialogFragment.TAG);
     }
 
     // override by yawei
@@ -294,6 +302,23 @@ public class SportActivity extends AppCompatActivity implements
             Log.w(TAG, "--------Sport add failed", e);
             hideKeyboard();
             Snackbar.make(findViewById(android.R.id.content), "Failed to add sport, Retry.",
+                    Snackbar.LENGTH_SHORT).show();
+        });
+    }
+
+    @Override
+    public void onSportDeleting(CollectionReference sportsRef, String sportId) {
+        deleteSport(mCalorieBurnRef, sportId).addOnSuccessListener(this, new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "-------Sport deleted");
+                hideKeyboard();
+                mFiresportRecycler.smoothScrollToPosition(0);
+            }
+        }).addOnFailureListener(this, (e)->{
+            Log.w(TAG, "--------Sport delete failed", e);
+            hideKeyboard();
+            Snackbar.make(findViewById(android.R.id.content), "Failed to delete sport, Retry.",
                     Snackbar.LENGTH_SHORT).show();
         });
     }

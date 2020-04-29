@@ -451,7 +451,7 @@
                                     android:layout_height="match_parent"
                                     android:paddingTop="3dp"
                                     android:paddingLeft="10dp"
-                                    android:text="Calorie Burned"
+                                    android:text="Calorie Burn"
                                     android:textColor="#404040"
                                     android:textSize="18dp" />
                                 <TextView
