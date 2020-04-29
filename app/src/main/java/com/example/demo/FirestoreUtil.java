@@ -114,6 +114,41 @@ public class FirestoreUtil {
         });
     }
 
+    //set target weight
+    public void setWeightGoal(Double weightGoal, TextView weightGoalView){
+        DocumentReference wgDoc = userDocRef.collection("goals").document("weightGoal");
+        Map<String, Double> map = new HashMap<>();
+        map.put("target", weightGoal);
+        wgDoc.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                weightGoalView.setText(String.valueOf(weightGoal));
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println(TAG + " set target weight failed");
+            }
+        });
+    }
+
+    //get target weight
+    public void getWeightGoal(TextView targetView){
+        DocumentReference wgDoc = userDocRef.collection("goals").document("weightGoal");
+        wgDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot snapshot = task.getResult();
+                    if(snapshot.exists()){
+                        Double target = snapshot.getDouble("target");
+                        targetView.setText(String.valueOf(target));
+                    }
+                }
+            }
+        })
+    }
+
     public void getBurnGoal(TextView burnView){
         DocumentReference bgDoc = userDocRef.collection("goals").document("burnGoal");
         bgDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
