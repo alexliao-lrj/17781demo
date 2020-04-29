@@ -28,6 +28,7 @@ public class HomeFragment extends Fragment {
     private View home_healthdata;
     private View home_mealplan;
     private View home_fitnessgoal;
+    private View home_wellness_weight;
     private NavController navController;
 
     TextView userName;
@@ -73,6 +74,14 @@ public class HomeFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.fitnessGoalFragment);
             }
         });
+
+        home_wellness_weight = activity.findViewById(R.id.home_wellness_weight);
+        home_wellness_weight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCurrentWeightClick();
+            }
+        });
     }
 
     @Override
@@ -86,5 +95,13 @@ public class HomeFragment extends Fragment {
             userName = requireActivity().findViewById(R.id.profile_username);
             userName.setText(curUser.getEmail());
         }
+    }
+
+    private void onCurrentWeightClick(){
+        //test
+        FirestoreUtil util = new FirestoreUtil();
+        util.setCurrentWeight(110.8);
+        util.getCalorieIntakeByDate("2020-04-10");
+        util.getCalorieBurnByDate("2020-04-28");
     }
 }
