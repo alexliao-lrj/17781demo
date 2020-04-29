@@ -38,8 +38,58 @@ public class FirestoreUtil {
         return userDocRef.collection(dateKey);
     }
 
-    public void setMealPlan(){
+    public void setMealPlan(Integer plan, TextView planView){
+        DocumentReference mdoc = userDocRef.collection("goals").document("mealPlan");
+        Map<String, Integer> map = new HashMap<>();
+        map.put("plan", plan);
+        String mealPlan = getMealPlanStr(plan);
+        mdoc.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                planView.setText(mealPlan);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println(TAG + "set mealplan failed");
+            }
+        });
+    }
 
+    public String getMealPlanStr(Integer plan){
+        //0
+        String str = "Balanced Diet";
+        switch (plan){
+            case 1:
+                str = "5 : 2 Fast Diet";
+                break;
+            case 2:
+                str = "16 : 8 Intermittent Fasting";
+                break;
+            case 3:
+                str = "18 : 6 Intermittent Fasting";
+                break;
+            default:
+                break;
+        }
+        return str;
+    }
+
+    public void getMealPlan(TextView planView){
+        DocumentReference mdoc = userDocRef.collection("goals").document("mealPlan");
+        mdoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot snapshot = task.getResult();
+                    if(snapshot.exists()){
+                        Integer plan = (Integer)snapshot.get("plan");
+                        String planStr = getMealPlanStr(plan);
+                        planView.setText(planStr);
+                    }
+                }
+            }
+        });
     }
 
     public void setCurrentWeight(Double weight, TextView curWeightView){
@@ -146,7 +196,7 @@ public class FirestoreUtil {
                     }
                 }
             }
-        })
+        });
     }
 
     public void getBurnGoal(TextView burnView){
