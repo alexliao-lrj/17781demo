@@ -38,6 +38,10 @@ public class FirestoreUtil {
         return userDocRef.collection(dateKey);
     }
 
+    public void setMealPlan(){
+
+    }
+
     public void setCurrentWeight(Double weight, TextView curWeightView){
         String dateKey = LocalDate.now().toString();
         DocumentReference weightByDate = userDocRef.collection("weights").document(dateKey);
@@ -57,6 +61,23 @@ public class FirestoreUtil {
                         System.out.println(TAG + "set weight failed");
                     }
                 });
+    }
+
+    public void getCurrentWeight(TextView weightView){
+        String dateKey = LocalDate.now().toString();
+        DocumentReference weightByDate = userDocRef.collection("weights").document(dateKey);
+        weightByDate.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot snapshot = task.getResult();
+                    if(snapshot.exists()){
+                        Double cur = snapshot.getDouble("weight");
+                        weightView.setText(String.valueOf(cur));
+                    }
+                }
+            }
+        });
     }
 
     public void setIntakeGoal(Double intakeGoal, TextView intakeView){
@@ -89,6 +110,38 @@ public class FirestoreUtil {
             @Override
             public void onFailure(@NonNull Exception e) {
                 System.out.println(TAG + " set burn goal failed");
+            }
+        });
+    }
+
+    public void getBurnGoal(TextView burnView){
+        DocumentReference bgDoc = userDocRef.collection("goals").document("burnGoal");
+        bgDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()){
+                        Double burn = (Double)document.get("burn");
+                        burnView.setText(String.valueOf(burn));
+                    }
+                }
+            }
+        });
+    }
+
+    public void getIntakeGoal(TextView intakeView){
+        DocumentReference igDoc = userDocRef.collection("goals").document("intakeGoal");
+        igDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot snapshot = task.getResult();
+                    if(snapshot.exists()){
+                        Double intake = (Double)snapshot.get("intake");
+                        intakeView.setText(String.valueOf(intake));
+                    }
+                }
             }
         });
     }

@@ -107,7 +107,7 @@ public class HomeFragment extends Fragment {
     private void onCurrentWeightClick(){
         //test
         FirestoreUtil util = new FirestoreUtil();
-        util.setCurrentWeight(110.6, curWeightData);
+        util.getCurrentWeight(curWeightData);
         util.getCalorieIntakeByDate("2020-04-10", calorieIntakeData);
         util.getCalorieBurnByDate("2020-04-28", calorieBurnData);
         util.setBurnGoal(300.0, calorieBurnData);
