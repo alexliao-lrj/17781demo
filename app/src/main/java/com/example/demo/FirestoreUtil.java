@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -22,7 +24,6 @@ public class FirestoreUtil {
     private static final String TAG = "FirestoreUtil";
 
     private FirebaseFirestore mFirestore;
-    private Query mQuery;
     private DocumentReference userDocRef;
     private String userKey;
 
@@ -37,7 +38,7 @@ public class FirestoreUtil {
         return userDocRef.collection(dateKey);
     }
 
-    public void setCurrentWeight(Double weight){
+    public void setCurrentWeight(Double weight, TextView curWeightView){
         String dateKey = LocalDate.now().toString();
         DocumentReference weightByDate = userDocRef.collection("weights").document(dateKey);
         Map<String, Double> map = new HashMap<>();
@@ -47,6 +48,7 @@ public class FirestoreUtil {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        curWeightView.setText(String.valueOf(weight));
                         System.out.println(TAG + "set weight success");
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -57,7 +59,42 @@ public class FirestoreUtil {
                 });
     }
 
-    public void getCalorieIntakeByDate(String dateKey){
+    public void setIntakeGoal(Double intakeGoal, TextView intakeView){
+        DocumentReference igDoc = userDocRef.collection("goals").document("intakeGoal");
+        Map<String, Double> map = new HashMap<>();
+        map.put("intake", intakeGoal);
+        igDoc.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                intakeView.setText(String.valueOf(intakeGoal));
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println(TAG + " set intake goal failed");
+            }
+        });
+    }
+
+    public void setBurnGoal(Double burnGoal, TextView burnView){
+        DocumentReference bgDoc = userDocRef.collection("goals").document("burnGoal");
+        Map<String, Double> map = new HashMap<>();
+        map.put("burn", burnGoal);
+        bgDoc.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                burnView.setText(String.valueOf(burnGoal));
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println(TAG + " set burn goal failed");
+            }
+        });
+    }
+
+    //get total calorie intake on day 'dateKey', set 'intakeView' content to the total intake data
+    public void getCalorieIntakeByDate(String dateKey, TextView intakeView){
         DocumentReference df = getCollectionRefByDate(dateKey).document("calorieIntake");
         df.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -67,8 +104,7 @@ public class FirestoreUtil {
                     if (document.exists()) {
                         Double totalIntake = (Double)document.get("Total");
                         //set totalIntake here
-                        System.out.println(TAG + " Total Intake: " + totalIntake);
-
+                        intakeView.setText(String.valueOf(totalIntake));
                         System.out.println(TAG + " DocumentSnapshot data: " + document.getData());
                     } else {
                         System.out.println(TAG + " No such document");
@@ -80,7 +116,7 @@ public class FirestoreUtil {
         });
     }
 
-    public void getCalorieBurnByDate(String dateKey){
+    public void getCalorieBurnByDate(String dateKey, TextView burnView){
         DocumentReference df = getCollectionRefByDate(dateKey).document("calorieBurn");
         df.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -90,7 +126,7 @@ public class FirestoreUtil {
                     if (document.exists()) {
                         Double totalBurn = (Double)document.get("Total");
                         //set totalBurn here
-                        System.out.println(TAG + " Total Burn: " + totalBurn);
+                        burnView.setText(String.valueOf(totalBurn));
 
                         System.out.println(TAG + " DocumentSnapshot data: " + document.getData());
                     } else {

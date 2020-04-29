@@ -31,7 +31,10 @@ public class HomeFragment extends Fragment {
     private View home_wellness_weight;
     private NavController navController;
 
-    TextView userName;
+    private TextView userName;
+    private TextView calorieIntakeData;
+    private TextView calorieBurnData;
+    private TextView curWeightData;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -82,6 +85,10 @@ public class HomeFragment extends Fragment {
                 onCurrentWeightClick();
             }
         });
+
+        calorieIntakeData = activity.findViewById(R.id.intake_data);
+        calorieBurnData = activity.findViewById(R.id.burn_data);
+        curWeightData = activity.findViewById(R.id.cur_weight_data);
     }
 
     @Override
@@ -100,8 +107,9 @@ public class HomeFragment extends Fragment {
     private void onCurrentWeightClick(){
         //test
         FirestoreUtil util = new FirestoreUtil();
-        util.setCurrentWeight(110.8);
-        util.getCalorieIntakeByDate("2020-04-10");
-        util.getCalorieBurnByDate("2020-04-28");
+        util.setCurrentWeight(110.6, curWeightData);
+        util.getCalorieIntakeByDate("2020-04-10", calorieIntakeData);
+        util.getCalorieBurnByDate("2020-04-28", calorieBurnData);
+        util.setBurnGoal(300.0, calorieBurnData);
     }
 }
