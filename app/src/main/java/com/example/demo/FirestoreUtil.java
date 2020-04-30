@@ -69,6 +69,9 @@ public class FirestoreUtil {
             case 3:
                 str = "18 : 6 Intermittent Fasting";
                 break;
+            case 4:
+                str = "20 : 4 Intermittent Fasting";
+                break;
             default:
                 break;
         }
