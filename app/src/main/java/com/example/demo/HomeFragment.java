@@ -3,6 +3,7 @@ package com.example.demo;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -14,8 +15,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.demo.viewmodel.MainActivityViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -24,6 +38,9 @@ import com.google.firebase.auth.FirebaseUser;
 public class HomeFragment extends Fragment {
 
     private FirebaseAuth mAuth;
+    private FirebaseFirestore mFirestore;
+    private DocumentReference userDocRef;
+    private String userKey;
 
     private View home_healthdata;
     private View home_mealplan;
@@ -36,8 +53,18 @@ public class HomeFragment extends Fragment {
     private TextView calorieBurnData;
     private TextView curWeightData;
 
+    //meal plan notification view
+    //这个notification没有初始化，记得在onActivityCreated里findViewById
+    private TextView notification;
+
     public HomeFragment() {
         // Required empty public constructor
+    }
+
+    private void initFirestore(){
+        mFirestore = FirebaseFirestore.getInstance();
+        userKey = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        userDocRef = mFirestore.collection("users").document(userKey);
     }
 
 
@@ -52,6 +79,8 @@ public class HomeFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
         FragmentActivity activity = requireActivity();
+
+        initFirestore();
 
         home_healthdata = activity.findViewById(R.id.home_healthdata);
         home_healthdata.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +130,68 @@ public class HomeFragment extends Fragment {
         if(curUser != null){
             userName = requireActivity().findViewById(R.id.profile_username);
             userName.setText(curUser.getEmail());
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //set notification text
+        DocumentReference mdoc = userDocRef.collection("goals").document("mealPlan");
+        mdoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot snapshot = task.getResult();
+                    if(snapshot.exists()){
+                        Integer plan = (Integer)snapshot.get("plan");
+                        try {
+                            setMealPlanNotification(plan, notification);
+                        }catch (ParseException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private void setMealPlanNotification(Integer plan, TextView notification) throws ParseException {
+        if(plan < 2){
+            return;
+        }
+        String[] starts = {"10:00:00", "10:00:00"};
+        String[] ends = {"18:00:00", "16:00:00"};
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String date = LocalDate.now().toString();
+        Date start = ft.parse(date + " " + starts[plan - 2]);
+        Date end = ft.parse(date + " " + ends[plan - 2]);
+        Date now = new Date();
+        if(isBetween(now, start, end)){
+            notification.setText("Inside Meal Window, grab sth to Eat!");
+        }else{
+            notification.setText("Intermittent Fasting: Stop Eating!");
+        }
+    }
+
+    private boolean isBetween(Date now, Date start, Date end){
+        if (now.getTime() == start.getTime() || now.getTime() == end.getTime()) {
+            return true;
+        }
+
+        Calendar date = Calendar.getInstance();
+        date.setTime(now);
+
+        Calendar begin = Calendar.getInstance();
+        begin.setTime(start);
+
+        Calendar ends = Calendar.getInstance();
+        ends.setTime(end);
+
+        if (date.after(begin) && date.before(ends)) {
+            return true;
+        } else {
+            return false;
         }
     }
 
