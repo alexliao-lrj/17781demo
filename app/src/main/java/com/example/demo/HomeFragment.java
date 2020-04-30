@@ -54,8 +54,6 @@ public class HomeFragment extends Fragment implements EditCurrentWeightDialogFra
     private TextView calorieBurnData;
     private TextView curWeightData;
 
-    private TextView originalWeight;
-
     private EditCurrentWeightDialogFragment editCurrentWeightDialogFragment;
     //meal plan notification view
     //这个notification没有初始化，记得在onActivityCreated里findViewById
@@ -76,18 +74,8 @@ public class HomeFragment extends Fragment implements EditCurrentWeightDialogFra
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-        originalWeight = v.findViewById(R.id.curWeight);
-        System.out.println("----------------before click");
-        originalWeight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("-----------------before openDialog");
-                openDialog();
-            }
-        });
-
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return v;
     }
 
 //    public void textClick(View v){
@@ -133,13 +121,13 @@ public class HomeFragment extends Fragment implements EditCurrentWeightDialogFra
             }
         });
 
-//        home_wellness_weight = activity.findViewById(R.id.home_wellness_weight);
-//        home_wellness_weight.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onCurrentWeightClick();
-//            }
-//        });
+        home_wellness_weight = activity.findViewById(R.id.home_wellness_weight);
+        home_wellness_weight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
 
         calorieIntakeData = activity.findViewById(R.id.intake_data);
         calorieBurnData = activity.findViewById(R.id.burn_data);
@@ -230,8 +218,8 @@ public class HomeFragment extends Fragment implements EditCurrentWeightDialogFra
         util.setBurnGoal(300.0, calorieBurnData);
     }
 
-    public void editCurrentWeight(Double weight, TextView curWeightView){
+    public void editCurrentWeight(Double weight){
         FirestoreUtil util = new FirestoreUtil();
-        util.setCurrentWeight(weight, curWeightView);
+        util.setCurrentWeight(weight, curWeightData);
     }
 }

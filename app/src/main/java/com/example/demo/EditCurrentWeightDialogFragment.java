@@ -25,15 +25,10 @@ public class EditCurrentWeightDialogFragment extends DialogFragment{
 
     public static final String KEY_DATE = "key_date";
 
-    private FirebaseFirestore mFirestore;
-    private CollectionReference sportRef;
-
     private EditText currentWeight;
-    private Button cancel, submit;
-
 
     public interface CurrentWeightListener {
-        void editCurrentWeight(Double weight, TextView curWeightView);
+        void editCurrentWeight(Double weight);
     }
 
     private CurrentWeightListener listener;
@@ -57,8 +52,7 @@ public class EditCurrentWeightDialogFragment extends DialogFragment{
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String newWeight = currentWeight.getText().toString();
-                        TextView cur_weight_data = view.findViewById(R.id.cur_weight_data);
-                        listener.editCurrentWeight(Double.parseDouble(newWeight), cur_weight_data);
+                        listener.editCurrentWeight(Double.parseDouble(newWeight));
                     }
                 });
 
@@ -70,12 +64,6 @@ public class EditCurrentWeightDialogFragment extends DialogFragment{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-        try {
-            listener = (CurrentWeightListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() +
-                    "must implement CurrentWeightListener");
-        }
+        listener = (CurrentWeightListener) getParentFragment();
     }
 }
