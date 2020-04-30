@@ -164,8 +164,11 @@ public class HomeFragment extends Fragment implements
         notification = activity.findViewById(R.id.meal_plan_detail);
 
         FirestoreUtil util = new FirestoreUtil();
-        util.getCalorieIntakeByDate("2020-04-10", calorieIntakeData);
-        util.getCalorieBurnByDate("2020-04-28", calorieBurnData);
+        SimpleDateFormat sdf = new SimpleDateFormat();// standard time
+        sdf.applyPattern("yyyy-MM-dd");// a --> am/pm
+        Date date = new Date();// current time
+        util.getCalorieIntakeByDate(sdf.format(date), calorieIntakeData);
+        util.getCalorieBurnByDate(sdf.format(date), calorieBurnData);
         util.getBurnGoal(curBurnGoal);
         util.getIntakeGoal(curIntakeGoal);
         util.getCurrentWeight(curWeightData);
@@ -195,7 +198,8 @@ public class HomeFragment extends Fragment implements
                 if(task.isSuccessful()){
                     DocumentSnapshot snapshot = task.getResult();
                     if(snapshot.exists()){
-                        Integer plan = (Integer)snapshot.get("plan");
+//                        Integer plan = (Integer)snapshot.get("plan");
+                        Integer plan = (int)(long)snapshot.get("plan");
                         try {
                             setMealPlanNotification(plan, notification);
                         }catch (ParseException e){
@@ -219,7 +223,7 @@ public class HomeFragment extends Fragment implements
         Date end = ft.parse(date + " " + ends[plan - 2]);
         Date now = new Date();
         if(isBetween(now, start, end)){
-            notification.setText("Inside Meal Window, grab sth to Eat!");
+            notification.setText("Inside the Meal Window, grab something to Eat!");
         }else{
             notification.setText("Intermittent Fasting: Stop Eating!");
         }
