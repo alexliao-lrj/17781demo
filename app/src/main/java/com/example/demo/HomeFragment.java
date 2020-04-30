@@ -174,8 +174,8 @@ public class HomeFragment extends Fragment implements EditCurrentWeightDialogFra
         if(plan < 2){
             return;
         }
-        String[] starts = {"10:00:00", "10:00:00"};
-        String[] ends = {"18:00:00", "16:00:00"};
+        String[] starts = {"10:00:00", "10:00:00", "12:00:00"};
+        String[] ends = {"18:00:00", "16:00:00", "16:00:00"};
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String date = LocalDate.now().toString();
         Date start = ft.parse(date + " " + starts[plan - 2]);
