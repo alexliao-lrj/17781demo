@@ -1,21 +1,39 @@
 # 17781demo
-wefit demo for 17781 mini3
+wefit demo for 17781 mini4
 
 ## Implemented Functions
-- UI prototypes
-  - Home page
-  - Health Data page
-  - Fitness Goal page
-  - Meal Plan page
-  - Food List page
-  - Add Food page
-  - Login page
-- Navigation Controller
-- ViewModel
-- Adapter
+- Sign Up / Login Authentication
+- Calorie Intake Tracker
+  - Foods Tracker
+- Calorie Burn Tracker
+  - Sports Tracker
+  - Step Counter
+- Weight Tracker
+- Meal Plan
+  - Various Diet Options
+  - Customized Notification
+- Health Goals Management
+  - Everyday Calorie Goals
+  - Weight Goals
+  - Sport Goals
+- Data on Cloud
+  - Login from different devices
 
 ## Manual
-- Use any username and pwd, click Login button. (Register, Login and Authentication will be implemented in mini4)
-- In Home page, Health data/Fitness goal/Meal plan item will navigate you to corresponding page. Items in Wellness Profile section currently don't have any links/actions, we will add actions in mini4.
+- Register and Login with Email and password.
 - Use the bottom navigation bar to navigate between arbitrary pages.
-- Click Food to see the food list. On the food list page, click add button to add a food, or click home button to go back to home page. Currently, there will always be three existed food items upon initialization for UI testing reason. We will use Room database and Firebase to implement backend feature in mini4.
+- Home page
+  - Meal Plan Notification
+  - Wellness profile overview
+  - Health goals setup : click on 'Wellness profile' items to setup health goals
+  - Navigation
+- Foods
+  - Add, Update or Delete any food
+- Sports
+  - Add or Delete any sport
+- Meal plan page
+  - Click 'Meal Plan' tab on Home page and setup your meal plan
+- Health Data page
+  - Click 'Health Data' tab on Home page or use botton navigation to go to Health data page
+  - Click 'current weight'/'target weight' to record today's weight or setup a weight goal.
+- Use the hidden menu on top navigation bar to signout.
