@@ -108,7 +108,7 @@ public class FirestoreUtil {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        curWeightView.setText(String.valueOf(weight.intValue()) + " lbs");
+                        curWeightView.setText(String.valueOf(weight) + " lbs");
                         System.out.println(TAG + "set weight success");
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -129,7 +129,7 @@ public class FirestoreUtil {
                     DocumentSnapshot snapshot = task.getResult();
                     if(snapshot.exists()){
                         Double cur = snapshot.getDouble("weight");
-                        weightView.setText(String.valueOf(cur.intValue()) + " lbs");
+                        weightView.setText(String.valueOf(cur) + " lbs");
                     }
                 }
             }
@@ -143,7 +143,7 @@ public class FirestoreUtil {
         igDoc.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                intakeView.setText("/ " + String.valueOf(intakeGoal.intValue()) + " kcal");
+                intakeView.setText("/ " + String.valueOf(intakeGoal) + " kcal");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -160,7 +160,7 @@ public class FirestoreUtil {
         bgDoc.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                burnView.setText("/ " + String.valueOf(burnGoal.intValue()) + " kcal");
+                burnView.setText("/ " + String.valueOf(burnGoal) + " kcal");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -178,7 +178,7 @@ public class FirestoreUtil {
         wgDoc.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                weightGoalView.setText(String.valueOf(weightGoal.intValue()) + " lbs");
+                weightGoalView.setText(String.valueOf(weightGoal) + " lbs");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -198,7 +198,7 @@ public class FirestoreUtil {
                     DocumentSnapshot snapshot = task.getResult();
                     if(snapshot.exists()){
                         Double target = snapshot.getDouble("target");
-                        targetView.setText(String.valueOf(target.intValue()) + " lbs");
+                        targetView.setText(String.valueOf(target) + " lbs");
                     }
                 }
             }
@@ -248,7 +248,7 @@ public class FirestoreUtil {
                     if (document.exists()) {
                         Double totalIntake = (Double)document.get("Total");
                         //set totalIntake here
-                        intakeView.setText(String.valueOf(totalIntake.intValue()));
+                        intakeView.setText(String.valueOf(totalIntake));
                         System.out.println(TAG + " DocumentSnapshot data: " + document.getData());
                     } else {
                         System.out.println(TAG + " No such document");
@@ -270,7 +270,7 @@ public class FirestoreUtil {
                     if (document.exists()) {
                         Double totalBurn = (Double)document.get("Total");
                         //set totalBurn here
-                        burnView.setText(String.valueOf(totalBurn.intValue()));
+                        burnView.setText(String.valueOf(totalBurn));
 
                         System.out.println(TAG + " DocumentSnapshot data: " + document.getData());
                     } else {
