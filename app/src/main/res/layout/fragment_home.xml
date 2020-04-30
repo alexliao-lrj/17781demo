@@ -88,6 +88,58 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="0"/>
 
+
+                <!-- Meal Plan -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF">
+                    <!-- A CardView that contains a TextView -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view0"
+                        android:layout_width="390dp"
+                        android:layout_height="100dp"
+                        android:layout_centerInParent="true"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="5dp"
+                        app:contentPaddingBottom="12dp"
+                        app:contentPaddingLeft="12dp"
+                        app:contentPaddingRight="12dp"
+                        app:contentPaddingTop="12dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginTop="50dp">
+
+                        <!--Health Data-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="15dp">
+
+                            <LinearLayout
+                                android:id="@+id/cur_meal_plan"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:padding="5dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/meal_plan_detail"
+                                    android:layout_width="200dp"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="3dp"
+                                    android:text="Current Meal Plan"
+                                    android:textColor="#404040"
+                                    android:textSize="18dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+
+
                 <!--Health Data; Fitness Goal; Meal Plan-->
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -101,12 +153,12 @@
                         android:layout_centerInParent="true"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="5dp"
-                        app:contentPaddingBottom="12dp"
+                        app:contentPaddingBottom="6dp"
                         app:contentPaddingLeft="12dp"
                         app:contentPaddingRight="12dp"
                         app:contentPaddingTop="12dp"
                         android:layout_marginBottom="0dp"
-                        android:layout_marginTop="50dp">
+                        android:layout_marginTop="25dp">
 
                         <!--Health Data-->
                         <LinearLayout
@@ -273,7 +325,7 @@
                         app:contentPaddingBottom="12dp"
                         app:contentPaddingLeft="12dp"
                         app:contentPaddingRight="12dp"
-                        app:contentPaddingTop="3dp"
+                        app:contentPaddingTop="0dp"
                         android:layout_marginBottom="0dp"
                         android:layout_marginTop="20dp">
 
@@ -345,10 +397,10 @@
 
                                 <TextView
                                     android:id="@+id/cur_weight_data"
-                                    android:layout_width="50dp"
+                                    android:layout_width="58dp"
                                     android:layout_height="wrap_content"
                                     android:text="120 lbs"
-                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginLeft="9dp"
                                     android:textAlignment="textStart" />
 
                                 <ImageView
@@ -448,7 +500,7 @@
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
                             android:paddingLeft="3dp"
-                            android:paddingTop="178dp">
+                            android:paddingTop="170dp">
 
                             <LinearLayout
                                 android:id="@+id/home_wellness_burn"

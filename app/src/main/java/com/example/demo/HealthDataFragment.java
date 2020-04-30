@@ -70,6 +70,10 @@ public class HealthDataFragment extends Fragment implements
 
         curWeightData = activity.findViewById(R.id.cur_weight_health_data);
         targetWeight = activity.findViewById(R.id.target_weight_health_data);
+
+        FirestoreUtil util = new FirestoreUtil();
+        util.getWeightGoal(targetWeight);
+        util.getCurrentWeight(curWeightData);
     }
 
 

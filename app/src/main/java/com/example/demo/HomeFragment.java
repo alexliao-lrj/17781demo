@@ -64,7 +64,6 @@ public class HomeFragment extends Fragment implements
     private TextView curIntakeGoal;
     private TextView curBurnGoal;
 
-    private EditCurrentWeightDialogFragment editCurrentWeightDialogFragment;
     //meal plan notification view
     //这个notification没有初始化，记得在onActivityCreated里findViewById
     private TextView notification;
@@ -162,6 +161,14 @@ public class HomeFragment extends Fragment implements
         curWeightData = activity.findViewById(R.id.cur_weight_data);
         curIntakeGoal = activity.findViewById(R.id.intake_data_goal);
         curBurnGoal = activity.findViewById(R.id.burn_data_goal);
+        notification = activity.findViewById(R.id.meal_plan_detail);
+
+        FirestoreUtil util = new FirestoreUtil();
+        util.getCalorieIntakeByDate("2020-04-10", calorieIntakeData);
+        util.getCalorieBurnByDate("2020-04-28", calorieBurnData);
+        util.getBurnGoal(curBurnGoal);
+        util.getIntakeGoal(curIntakeGoal);
+        util.getCurrentWeight(curWeightData);
     }
 
     @Override
