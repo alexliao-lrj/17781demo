@@ -105,7 +105,7 @@ public class FirestoreUtil {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        curWeightView.setText(String.valueOf(weight));
+                        curWeightView.setText(String.valueOf(weight) + " lbs");
                         System.out.println(TAG + "set weight success");
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -140,7 +140,7 @@ public class FirestoreUtil {
         igDoc.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                intakeView.setText(String.valueOf(intakeGoal));
+                intakeView.setText("/ " + String.valueOf(intakeGoal) + " kcal");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -157,7 +157,7 @@ public class FirestoreUtil {
         bgDoc.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                burnView.setText(String.valueOf(burnGoal));
+                burnView.setText("/ " + String.valueOf(burnGoal) + " kcal");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -175,7 +175,7 @@ public class FirestoreUtil {
         wgDoc.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                weightGoalView.setText(String.valueOf(weightGoal));
+                weightGoalView.setText(String.valueOf(weightGoal) + "lbs");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

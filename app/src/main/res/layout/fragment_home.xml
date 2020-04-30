@@ -398,16 +398,24 @@
 
                                 <TextView
                                     android:id="@+id/intake_data"
-                                    android:layout_width="100dp"
+                                    android:layout_width="38dp"
                                     android:layout_height="wrap_content"
-                                    android:text="600 / 1230 kcal"
+                                    android:text="600"
                                     android:layout_marginLeft="65dp"
+                                    android:textAlignment="textStart" />
+
+                                <TextView
+                                    android:id="@+id/intake_data_goal"
+                                    android:layout_width="88dp"
+                                    android:layout_height="wrap_content"
+                                    android:text=" / 1230 kcal"
+                                    android:layout_marginLeft="0dp"
                                     android:textAlignment="textStart" />
 
                                 <ImageView
                                     android:layout_width="20dp"
                                     android:layout_height="30dp"
-                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginLeft="-14dp"
                                     android:layout_marginRight="15dp"
                                     android:src="@drawable/ic_common_right_arrow" />
                             </LinearLayout>
@@ -458,18 +466,26 @@
                                     android:text="Calorie Burn"
                                     android:textColor="#404040"
                                     android:textSize="18dp" />
+
                                 <TextView
                                     android:id="@+id/burn_data"
-                                    android:layout_width="90dp"
+                                    android:layout_width="38dp"
                                     android:layout_height="wrap_content"
-                                    android:text="420 / 500 kcal"
-                                    android:layout_marginLeft="75dp"
+                                    android:text="420"
+                                    android:layout_marginLeft="68dp"
+                                    android:textAlignment="textStart" />
+                                <TextView
+                                    android:id="@+id/burn_data_goal"
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
+                                    android:text=" / 500 kcal"
+                                    android:layout_marginLeft="0dp"
                                     android:textAlignment="textStart" />
 
                                 <ImageView
                                     android:layout_width="20dp"
                                     android:layout_height="30dp"
-                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginLeft="-10dp"
                                     android:layout_marginRight="15dp"
                                     android:src="@drawable/ic_common_right_arrow" />
                             </LinearLayout>

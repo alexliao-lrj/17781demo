@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Spinner;
 
 import androidx.fragment.app.DialogFragment;
 
@@ -20,25 +20,25 @@ import com.example.demo.model.Firesport;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class EditCurrentWeightDialogFragment extends DialogFragment{
-    public static final String TAG = "Edit current weight";
+public class EditCalorieIntakeDialogFragment extends DialogFragment{
+    public static final String TAG = "Edit intake goal";
 
     public static final String KEY_DATE = "key_date";
 
-    private EditText currentWeight;
+    private EditText currentIntakeGoal;
 
-    public interface CurrentWeightListener {
-        void editCurrentWeight(Double weight);
+    public interface IntakeGoalListener {
+        void editIntakeGoal(Double intakeGoal);
     }
 
-    private CurrentWeightListener listener;
+    private IntakeGoalListener listener;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.fragment_edit_current_weight, null);
+        View view = inflater.inflate(R.layout.fragment_edit_calorie_intake, null);
 
 
         builder.setView(view)
@@ -52,12 +52,12 @@ public class EditCurrentWeightDialogFragment extends DialogFragment{
                 .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String newWeight = currentWeight.getText().toString();
-                        listener.editCurrentWeight(Double.parseDouble(newWeight));
+                        String newGoal = currentIntakeGoal.getText().toString();
+                        listener.editIntakeGoal(Double.parseDouble(newGoal));
                     }
                 });
 
-        currentWeight = view.findViewById(R.id.current_weight);
+        currentIntakeGoal = view.findViewById(R.id.current_intake_goal);
 
         return builder.create();
     }
@@ -65,6 +65,6 @@ public class EditCurrentWeightDialogFragment extends DialogFragment{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        listener = (CurrentWeightListener) getParentFragment();
+        listener = (IntakeGoalListener) getParentFragment();
     }
 }

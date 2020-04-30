@@ -1,6 +1,8 @@
 package com.example.demo;
 
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -38,6 +40,8 @@ import java.util.Date;
  */
 public class HomeFragment extends Fragment implements
         View.OnClickListener,
+        EditCalorieIntakeDialogFragment.IntakeGoalListener,
+        EditCalorieBurnDialogFragment.BurnGoalListener,
         EditCurrentWeightDialogFragment.CurrentWeightListener{
 
     private FirebaseAuth mAuth;
@@ -49,12 +53,16 @@ public class HomeFragment extends Fragment implements
     private View home_mealplan;
     private View home_fitnessgoal;
     private View home_wellness_weight;
+    private View home_wellness_intake;
+    private View home_wellness_burn;
     private NavController navController;
 
     private TextView userName;
     private TextView calorieIntakeData;
     private TextView calorieBurnData;
     private TextView curWeightData;
+    private TextView curIntakeGoal;
+    private TextView curBurnGoal;
 
     private EditCurrentWeightDialogFragment editCurrentWeightDialogFragment;
     //meal plan notification view
@@ -131,9 +139,29 @@ public class HomeFragment extends Fragment implements
             }
         });
 
+        home_wellness_intake = activity.findViewById(R.id.home_wellness_intake);
+        home_wellness_intake.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditCalorieIntakeDialogFragment editCalorieIntakeDialogFragment = new EditCalorieIntakeDialogFragment();
+                editCalorieIntakeDialogFragment.show(getChildFragmentManager(), editCalorieIntakeDialogFragment.TAG);
+            }
+        });
+
+        home_wellness_burn = activity.findViewById(R.id.home_wellness_burn);
+        home_wellness_burn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditCalorieBurnDialogFragment editCalorieBurnDialogFragment = new EditCalorieBurnDialogFragment();
+                editCalorieBurnDialogFragment.show(getChildFragmentManager(), editCalorieBurnDialogFragment.TAG);
+            }
+        });
+
         calorieIntakeData = activity.findViewById(R.id.intake_data);
         calorieBurnData = activity.findViewById(R.id.burn_data);
         curWeightData = activity.findViewById(R.id.cur_weight_data);
+        curIntakeGoal = activity.findViewById(R.id.intake_data_goal);
+        curBurnGoal = activity.findViewById(R.id.burn_data_goal);
     }
 
     @Override
@@ -211,17 +239,27 @@ public class HomeFragment extends Fragment implements
         }
     }
 
-    private void onCurrentWeightClick(){
-        //test
-        FirestoreUtil util = new FirestoreUtil();
-        util.getCurrentWeight(curWeightData);
-        util.getCalorieIntakeByDate("2020-04-10", calorieIntakeData);
-        util.getCalorieBurnByDate("2020-04-28", calorieBurnData);
-        util.setBurnGoal(300.0, calorieBurnData);
-    }
+//    private void onCurrentWeightClick(){
+//        //test
+//        FirestoreUtil util = new FirestoreUtil();
+//        util.getCurrentWeight(curWeightData);
+//        util.getCalorieIntakeByDate("2020-04-10", calorieIntakeData);
+//        util.getCalorieBurnByDate("2020-04-28", calorieBurnData);
+//        util.setBurnGoal(300.0, calorieBurnData);
+//    }
 
     public void editCurrentWeight(Double weight){
         FirestoreUtil util = new FirestoreUtil();
         util.setCurrentWeight(weight, curWeightData);
+    }
+
+    public void editIntakeGoal(Double calorie){
+        FirestoreUtil util = new FirestoreUtil();
+        util.setIntakeGoal(calorie, curIntakeGoal);
+    }
+
+    public void editBurnGoal(Double calorie){
+        FirestoreUtil util = new FirestoreUtil();
+        util.setBurnGoal(calorie, curBurnGoal);
     }
 }

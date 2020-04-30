@@ -16,22 +16,23 @@ import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
 
+import com.example.demo.R;
 import com.example.demo.model.Firesport;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class EditCurrentWeightDialogFragment extends DialogFragment{
+public class EditCurrentWeightHealthDialogFragment extends DialogFragment{
     public static final String TAG = "Edit current weight";
 
     public static final String KEY_DATE = "key_date";
 
     private EditText currentWeight;
 
-    public interface CurrentWeightListener {
-        void editCurrentWeight(Double weight);
+    public interface HealthCurrentWeightListener {
+        void editHealthCurrentWeight(Double weight);
     }
 
-    private CurrentWeightListener listener;
+    private HealthCurrentWeightListener listener;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
@@ -53,7 +54,7 @@ public class EditCurrentWeightDialogFragment extends DialogFragment{
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String newWeight = currentWeight.getText().toString();
-                        listener.editCurrentWeight(Double.parseDouble(newWeight));
+                        listener.editHealthCurrentWeight(Double.parseDouble(newWeight));
                     }
                 });
 
@@ -65,6 +66,6 @@ public class EditCurrentWeightDialogFragment extends DialogFragment{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        listener = (CurrentWeightListener) getParentFragment();
+        listener = (HealthCurrentWeightListener) getParentFragment();
     }
 }
