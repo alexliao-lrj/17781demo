@@ -36,7 +36,9 @@ import java.util.Date;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements EditCurrentWeightDialogFragment.CurrentWeightListener{
+public class HomeFragment extends Fragment implements
+        View.OnClickListener,
+        EditCurrentWeightDialogFragment.CurrentWeightListener{
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
@@ -78,22 +80,23 @@ public class HomeFragment extends Fragment implements EditCurrentWeightDialogFra
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         originalWeight = v.findViewById(R.id.curWeight);
         System.out.println("----------------before click");
-        originalWeight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("-----------------before openDialog");
-                openDialog();
-            }
-        });
+        originalWeight.setOnClickListener(this);
+//        originalWeight.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                System.out.println("-----------------before openDialog");
+//                openDialog();
+//            }
+//        });
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-//    public void textClick(View v){
-//        System.out.println("-------------get into textClick");
-//        openDialog();
-//    }
+    public void onClick(View v){
+        System.out.println("-------------get into textClick");
+        openDialog();
+    }
 
     public void openDialog(){
         EditCurrentWeightDialogFragment editCurrentWeightDialogFragment = new EditCurrentWeightDialogFragment();
