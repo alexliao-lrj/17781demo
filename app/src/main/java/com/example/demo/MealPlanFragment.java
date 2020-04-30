@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +48,22 @@ public class MealPlanFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity activity = requireActivity();
 
+        curMealPlan = activity.findViewById(R.id.current_mealplan_detail);
+        FirestoreUtil util = new FirestoreUtil();
+        util.getMealPlan(curMealPlan);
+
+        mealplan_balanced_diet = activity.findViewById(R.id.mealplan_balanced_diet);
+        mealplan_balanced_diet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mealPlan_id = 0;
+                FirestoreUtil util = new FirestoreUtil();
+                util.setMealPlan(mealPlan_id, curMealPlan);
+                Snackbar.make(mealplan_balanced_diet, "Current Plan: " + FirestoreUtil.getMealPlanStr(mealPlan_id),
+                        Snackbar.LENGTH_LONG).show();
+            }
+        });
+
         mealplan_52fast = activity.findViewById(R.id.mealplan_52fast);
         mealplan_52fast.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +71,8 @@ public class MealPlanFragment extends Fragment {
                 mealPlan_id = 1;
                 FirestoreUtil util = new FirestoreUtil();
                 util.setMealPlan(mealPlan_id, curMealPlan);
+                Snackbar.make(mealplan_52fast, "Current Plan: " + FirestoreUtil.getMealPlanStr(mealPlan_id),
+                        Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -63,6 +83,8 @@ public class MealPlanFragment extends Fragment {
                 mealPlan_id = 2;
                 FirestoreUtil util = new FirestoreUtil();
                 util.setMealPlan(mealPlan_id, curMealPlan);
+                Snackbar.make(mealplan_168fasting, "Current Plan: " + FirestoreUtil.getMealPlanStr(mealPlan_id),
+                        Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -73,6 +95,8 @@ public class MealPlanFragment extends Fragment {
                 mealPlan_id = 3;
                 FirestoreUtil util = new FirestoreUtil();
                 util.setMealPlan(mealPlan_id, curMealPlan);
+                Snackbar.make(mealplan_186fasting, "Current Plan: " + FirestoreUtil.getMealPlanStr(mealPlan_id),
+                        Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -83,12 +107,11 @@ public class MealPlanFragment extends Fragment {
                 mealPlan_id = 4;
                 FirestoreUtil util = new FirestoreUtil();
                 util.setMealPlan(mealPlan_id, curMealPlan);
+                Snackbar.make(mealplan_204fasting, "Current Plan: " + FirestoreUtil.getMealPlanStr(mealPlan_id),
+                        Snackbar.LENGTH_LONG).show();
             }
         });
 
-        curMealPlan = activity.findViewById(R.id.current_mealplan_detail);
-        FirestoreUtil util = new FirestoreUtil();
-        util.getMealPlan(curMealPlan);
 //        util.setMealPlan(mealPlan_id, curMealPlan);
     }
 }

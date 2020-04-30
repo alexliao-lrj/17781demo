@@ -39,7 +39,6 @@ import java.util.Date;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment implements
-        View.OnClickListener,
         EditCalorieIntakeDialogFragment.IntakeGoalListener,
         EditCalorieBurnDialogFragment.BurnGoalListener,
         EditCurrentWeightDialogFragment.CurrentWeightListener{
@@ -65,7 +64,6 @@ public class HomeFragment extends Fragment implements
     private TextView curBurnGoal;
 
     //meal plan notification view
-    //这个notification没有初始化，记得在onActivityCreated里findViewById
     private TextView notification;
 
     public HomeFragment() {
@@ -87,10 +85,6 @@ public class HomeFragment extends Fragment implements
         return v;
     }
 
-    public void onClick(View v){
-        System.out.println("-------------get into textClick");
-        openDialog();
-    }
 
     public void openDialog(){
         EditCurrentWeightDialogFragment editCurrentWeightDialogFragment = new EditCurrentWeightDialogFragment();
@@ -205,6 +199,8 @@ public class HomeFragment extends Fragment implements
                         }catch (ParseException e){
                             e.printStackTrace();
                         }
+                    }else {
+                        notification.setText("Welcome!");
                     }
                 }
             }
@@ -213,10 +209,12 @@ public class HomeFragment extends Fragment implements
 
     private void setMealPlanNotification(Integer plan, TextView notification) throws ParseException {
         if(plan < 2){
+            String reminder = "Current Diet: " + FirestoreUtil.getMealPlanStr(plan);
+            notification.setText(reminder);
             return;
         }
-        String[] starts = {"10:00:00", "10:00:00", "12:00:00"};
-        String[] ends = {"18:00:00", "16:00:00", "16:00:00"};
+        String[] starts = {"10:00:00", "10:00:00", "11:00:00"};
+        String[] ends = {"18:00:00", "16:00:00", "15:00:00"};
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String date = LocalDate.now().toString();
         Date start = ft.parse(date + " " + starts[plan - 2]);
