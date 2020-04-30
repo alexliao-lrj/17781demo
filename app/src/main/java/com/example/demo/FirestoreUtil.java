@@ -56,7 +56,7 @@ public class FirestoreUtil {
         });
     }
 
-    public String getMealPlanStr(Integer plan){
+    public static String getMealPlanStr(Integer plan){
         //0
         String str = "Balanced Diet";
         switch (plan){
@@ -90,6 +90,8 @@ public class FirestoreUtil {
                         Integer plan = (int)(long)snapshot.get("plan");
                         String planStr = getMealPlanStr(plan);
                         planView.setText(planStr);
+                    }else {
+                        planView.setText("Choose one plan below!");
                     }
                 }
             }

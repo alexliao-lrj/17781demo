@@ -61,7 +61,7 @@ public class FirefoodAdapter extends FirestoreAdapter<FirefoodAdapter.ViewHolder
             Firefood food = snapshot.toObject(Firefood.class);
             foodNameView.setText(food.getName());
             totalCalView.setText(String.valueOf(food.getTotalCal()) + " kcal");
-            foodServing.setText(String.valueOf(food.getServing()) + " g");
+            foodServing.setText(String.valueOf(food.getServing()) + " servings");
 
             if(food.getCategory() == 1){
                 foodCategory.setText("Breakfast");
