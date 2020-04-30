@@ -12,6 +12,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements EditCurrentWeightDialogFragment.CurrentWeightListener{
 
     private FirebaseAuth mAuth;
 
@@ -36,6 +37,10 @@ public class HomeFragment extends Fragment {
     private TextView calorieBurnData;
     private TextView curWeightData;
 
+    private TextView button;
+
+    private EditCurrentWeightDialogFragment editCurrentWeightDialogFragment;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -44,9 +49,31 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        button = v.findViewById(R.id.curWeight);
+        System.out.println("----------------before click");
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("-----------------before openDialog");
+                openDialog();
+            }
+        });
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
+
+//    public void textClick(View v){
+//        System.out.println("-------------get into textClick");
+//        openDialog();
+//    }
+
+    public void openDialog(){
+        EditCurrentWeightDialogFragment editCurrentWeightDialogFragment = new EditCurrentWeightDialogFragment();
+        editCurrentWeightDialogFragment.show(getChildFragmentManager(), editCurrentWeightDialogFragment.TAG);
+    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
@@ -78,13 +105,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        home_wellness_weight = activity.findViewById(R.id.home_wellness_weight);
-        home_wellness_weight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCurrentWeightClick();
-            }
-        });
+//        home_wellness_weight = activity.findViewById(R.id.home_wellness_weight);
+//        home_wellness_weight.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onCurrentWeightClick();
+//            }
+//        });
 
         calorieIntakeData = activity.findViewById(R.id.intake_data);
         calorieBurnData = activity.findViewById(R.id.burn_data);
@@ -111,5 +138,10 @@ public class HomeFragment extends Fragment {
         util.getCalorieIntakeByDate("2020-04-10", calorieIntakeData);
         util.getCalorieBurnByDate("2020-04-28", calorieBurnData);
         util.setBurnGoal(300.0, calorieBurnData);
+    }
+
+    public void editCurrentWeight(Double weight, TextView curWeightView){
+        FirestoreUtil util = new FirestoreUtil();
+        util.setCurrentWeight(weight, curWeightView);
     }
 }

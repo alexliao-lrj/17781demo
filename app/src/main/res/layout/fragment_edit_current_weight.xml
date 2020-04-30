@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/corners_bg"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".EditCurrentWeightDialogFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="200dp"
+        android:orientation="vertical">
+
+<!--        <TextView-->
+<!--            android:id="@+id/edit_cur_weight"-->
+<!--            style="@style/AppTheme.Title"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            android:text="Current Weight"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="#6E6E6E"-->
+<!--            android:textSize="24dp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintBottom_toTopOf="@id/sport_name"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <EditText
+            android:id="@+id/current_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:ems="10"
+            android:hint="Current Weight"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@id/per_cal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_sport_title" />
+
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/current_weight_submit"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/sport_name"-->
+<!--            app:layout_constraintStart_toStartOf="@id/sport_name"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/sport_calorie">-->
+
+<!--            <Button-->
+<!--                android:id="@+id/cancel_current_weight"-->
+<!--                style="@style/Base.Widget.AppCompat.Button.Borderless"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="38dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="#F3EDED"-->
+<!--                android:backgroundTint="#E3E0E0"-->
+<!--                android:text="Cancel" />-->
+
+
+<!--            <Button-->
+<!--                android:id="@+id/submit_current_weight"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:backgroundTint="@color/colorPrimary"-->
+<!--                android:text="Submit" />-->
+
+<!--        </LinearLayout>-->
+    </LinearLayout>
+
+</LinearLayout>
