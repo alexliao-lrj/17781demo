@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +35,7 @@ public class HealthDataFragment extends Fragment implements
 
     private TextView curWeightData;
     private TextView targetWeight;
+    private TextView userName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +47,19 @@ public class HealthDataFragment extends Fragment implements
     @Override
     public void onClick(View v) {
 
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser curUser = mAuth.getCurrentUser();
+
+        if(curUser != null){
+            userName = requireActivity().findViewById(R.id.profile_username);
+            userName.setText(curUser.getEmail());
+        }
     }
 
     @Override

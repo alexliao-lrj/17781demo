@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 /**
@@ -30,6 +32,8 @@ public class MealPlanFragment extends Fragment {
     private View mealplan_168fasting;
     private View mealplan_186fasting;
     private View mealplan_204fasting;
+
+    private TextView userName;
 
     public MealPlanFragment() {
         // Required empty public constructor
@@ -113,5 +117,18 @@ public class MealPlanFragment extends Fragment {
         });
 
 //        util.setMealPlan(mealPlan_id, curMealPlan);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser curUser = mAuth.getCurrentUser();
+
+        if(curUser != null){
+            userName = requireActivity().findViewById(R.id.profile_username);
+            userName.setText(curUser.getEmail());
+        }
     }
 }

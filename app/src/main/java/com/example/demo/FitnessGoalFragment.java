@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 /**
@@ -29,7 +30,7 @@ public class FitnessGoalFragment extends Fragment {
 //    private View home_fitnessgoal;
     private NavController navController;
 
-    TextView userName;
+    private TextView userName;
 
     public FitnessGoalFragment() {
         // Required empty public constructor
@@ -58,6 +59,19 @@ public class FitnessGoalFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.dailyStepFragment);
             }
         });
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser curUser = mAuth.getCurrentUser();
+
+        if(curUser != null){
+            userName = requireActivity().findViewById(R.id.profile_username);
+            userName.setText(curUser.getEmail());
+        }
     }
 
 }
