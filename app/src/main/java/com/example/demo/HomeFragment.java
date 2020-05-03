@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment implements
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
     private DocumentReference userDocRef;
-    private String userKey;
+    private String userKey = "calmroger0@gmail.com";
 
     private View home_healthdata;
     private View home_mealplan;
@@ -72,7 +72,9 @@ public class HomeFragment extends Fragment implements
 
     private void initFirestore(){
         mFirestore = FirebaseFirestore.getInstance();
-        userKey = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            userKey = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        }
         userDocRef = mFirestore.collection("users").document(userKey);
     }
 

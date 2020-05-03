@@ -25,11 +25,13 @@ public class FirestoreUtil {
 
     private FirebaseFirestore mFirestore;
     private DocumentReference userDocRef;
-    private String userKey;
+    private String userKey = "calmroger0@gmail.com";
 
     public FirestoreUtil(){
         mFirestore = FirebaseFirestore.getInstance();
-        userKey = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            userKey = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        }
         userDocRef = mFirestore.collection("users").document(userKey);
     }
 
